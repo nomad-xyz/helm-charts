@@ -80,6 +80,21 @@ spec:
           - name: OPT_PROCESSOR_S3_REGION
             value: {{ .Values.nomad.processor.s3Proofs.region | quote }}
           {{- end }}
+          {{- if .Values.nomad.processor.s3Proofs.accessKeyId }}
+          - name: OPT_PROCESSOR_S3_ACCESS_KEY_ID
+            value: {{ .Values.nomad.processor.s3Proofs.accessKeyId | quote }}
+          {{- else }}
+          - name: OPT_PROCESSOR_S3_ACCESS_KEY_ID
+            value: {{ .Values.nomad.aws.accessKeyId | quote }}
+          {{- end }}
+          {{- if .Values.nomad.processor.s3Proofs.secretAccessKey }}
+          - name: OPT_PROCESSOR_S3_SECRET_ACCESS_KEY
+            value: {{ .Values.nomad.processor.s3Proofs.secretAccessKey | quote }}
+          {{- else }}
+          - name: OPT_PROCESSOR_S3_SECRET_ACCESS_KEY
+            value: {{ .Values.nomad.aws.secretAccessKey | quote }}
+          {{- end }}
+
         resources:
           {{- toYaml .Values.nomad.processor.resources | nindent 10 }}
         volumeMounts:

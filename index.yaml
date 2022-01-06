@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  keymaster:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-01-06T17:06:54.381175376Z"
+    description: A tool that queries metrics about Ethereum accounts
+    digest: 161fe6bd9db5ffbc1cf1e2976ebabbc59272802a0e0ce4133dc809ea51a28adf
+    name: keymaster
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/keymaster-0.1.0/keymaster-0.1.0.tgz
+    version: 0.1.0
   nomad-agent:
   - apiVersion: v2
     appVersion: 0.1.3
@@ -32,4 +43,4 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-monitor-0.1.0/nomad-monitor-0.1.0.tgz
     version: 0.1.0
-generated: "2022-01-05T16:34:09.143767133Z"
+generated: "2022-01-06T17:06:54.381185977Z"

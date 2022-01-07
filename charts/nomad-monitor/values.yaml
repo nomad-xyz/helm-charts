@@ -7,6 +7,7 @@ image:
   tag: 'latest'
 
 monitor:
+  networks: ["kovan", "moonbasealpha"]
   config: # Contents of .env file
 
 imagePullSecrets: []

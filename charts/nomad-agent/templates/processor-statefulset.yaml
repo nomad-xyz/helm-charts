@@ -94,6 +94,10 @@ spec:
           - name: OPT_PROCESSOR_S3_SECRET_ACCESS_KEY
             value: {{ .Values.nomad.aws.secretAccessKey | quote }}
           {{- end }}
+          {{- if .Values.nomad.processor.indexOnly }}
+          - name: OPT_PROCESSOR_INDEXON
+            value: "true"
+          {{- end }}
 
         resources:
           {{- toYaml .Values.nomad.processor.resources | nindent 10 }}

@@ -149,6 +149,7 @@ nomad:
       region: ""
       accessKeyId: ""
       secretAccessKey: ""
+    indexOnly: false
 
   kathy:
     enabled: false

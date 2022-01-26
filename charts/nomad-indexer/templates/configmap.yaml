@@ -3,8 +3,21 @@ apiVersion: v1
 metadata:
   name: {{.Release.Name}}-environment
 data:
+  {{- if .Values.indexer.rpcs.ethereum }}
   ETHEREUM_RPC: {{ .Values.indexer.rpcs.ethereum }}
+  {{- end }}
+  {{- if .Values.indexer.rpcs.moonbeam }}
   MOONBEAM_RPC: {{ .Values.indexer.rpcs.moonbeam }}
+  {{- end }}
+  {{- if .Values.indexer.rpcs.kovan }}
+  KOVAN_RPC: {{ .Values.indexer.rpcs.kovan }}
+  {{- end }}
+  {{- if .Values.indexer.rpcs.rinkeby }}
+  RINKEBY_RPC: {{ .Values.indexer.rpcs.rinkeby }}
+  {{- end }}
+  {{- if .Values.indexer.rpcs.moonbasealpha }}
+  MOONBASEALPHA_RPC: {{ .Values.indexer.rpcs.moonbasealpha }}
+  {{- end }}
   ENVIRONMENT: {{ .Values.indexer.environment }}
 
   PORT: {{ .Values.indexer.internalPort }}

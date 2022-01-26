@@ -18,6 +18,9 @@ indexer:
   rpcs: 
     ethereum: ""
     moonbeam: ""
+    kovan: ""
+    rinkeby: ""
+    moonbasealpha: ""
   postgres: 
     host: postgres
     user: postgres
@@ -34,8 +37,6 @@ cloudsqlProxy:
   connection:
     name: ""
     port: 5432
-  
-  
   
 
 podAnnotations: {}

@@ -1,0 +1,67 @@
+    apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.indexer.environment }}-nomad-indexer
+  labels:
+    environment: {{ .Values.indexer.environment }}
+    app.kubernetes.io/component: nomad-indexer
+spec:
+  selector:
+    matchLabels:
+      environment: {{ .Values.indexer.environment }}
+      app.kubernetes.io/component: nomad-indexer
+  replicas: 1 
+  serviceName: {{ .Values.indexer.environment }}-nomad-indexer
+  template:
+    metadata:
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        environment: {{ .Values.indexer.environment }}
+        app.kubernetes.io/component: nomad-indexer
+        {{- with .Values.podCommonLabels }}
+        {{ toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      terminationGracePeriodSeconds: 10
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+      - name: indexer
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 10 }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["npm", "run", "start", "indexer"]
+        envFrom:
+        - configMapRef:
+            name: {{.Release.Name}}-environment
+      {{- if .Values.cloudsqlProxy.enabled }}
+      - name: cloud-sql-proxy
+        image: {{ .Values.cloudsqlProxy.image.repository }}:{{ .Values.cloudsqlProxy.image.tag }}
+        command:
+          - "/cloud_sql_proxy"
+          - "-instances={{ .Values.cloudsqlProxy.connection.name }}=tcp:{{ .Values.cloudsqlProxy.connection.port }}"
+          - "-credential_file=/secrets/service_account.json"
+        securityContext:
+          runAsNonRoot: true
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu:    "1"
+        volumeMounts:
+        - name: {{.Release.Name}}-service-account
+          mountPath: /secrets/
+          readOnly: true
+      volumes:
+      - name: {{.Release.Name}}-service-account
+        configMap:
+          name: {{.Release.Name}}-service-account
+      {{- end }}

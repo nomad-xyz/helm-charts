@@ -1,0 +1,73 @@
+image:
+  repository: gcr.io/nomad-xyz/nomad-indexer
+  pullPolicy: Always
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+indexer: 
+  environment: development
+  internalPort: 3000
+  rpcs: 
+    ethereum: ""
+    moonbeam: ""
+  postgres: 
+    host: postgres
+    user: postgres
+    password: postgres
+    database: nomad-indexer
+    port: 5432
+
+cloudsqlProxy:  
+  enabled: false
+  image: 
+    repository: gcr.io/cloudsql-docker/gce-proxy
+    tag: "1.17"
+  serviceAccountJson: ""
+  connection:
+    name: ""
+    port: 5432
+  
+  
+  
+
+podAnnotations: {}
+podCommonLabels: {}
+
+storage:
+  storageClass: "standard"
+  accessModes: ReadWriteOnce
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources:
+  {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

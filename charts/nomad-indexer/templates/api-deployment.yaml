@@ -36,3 +36,7 @@ spec:
         ports: 
         - name: api
           containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 3000

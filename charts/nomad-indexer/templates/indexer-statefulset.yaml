@@ -1,0 +1,45 @@
+    apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-indexer
+  labels:
+    environment: {{ .Values.environment }}
+    app.kubernetes.io/component: indexer
+spec:
+  selector:
+    matchLabels:
+      environment: {{ .Values.environment }}
+      app.kubernetes.io/component: indexer
+  replicas: 1 
+  serviceName: {{ .Release.Name }}-indexer
+  template:
+    metadata:
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/indexer-configmap.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        environment: {{ .Values.environment }}
+        app.kubernetes.io/component: indexer
+        {{- with .Values.podCommonLabels }}
+        {{ toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      terminationGracePeriodSeconds: 10
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+      - name: indexer
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 10 }}
+        image: "{{ .Values.indexer.image.repository }}:{{ .Values.indexer.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.indexer.image.pullPolicy }}
+        command: ["npm", "run", "start", "indexer"]
+        envFrom:
+        - configMapRef:
+            name: {{.Release.Name }}-indexer-env

@@ -1,0 +1,72 @@
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+environment: development
+indexer: 
+  image:
+    repository: gcr.io/nomad-xyz/nomad-indexer
+    pullPolicy: Always
+    tag: "sha-2354e1d8"
+  db: 
+    host:  "{{ .Release.Name }}-postgresql"
+    user: postgres
+    password: postgres
+    database: nomad-indexer
+    port: 5432
+  internalPort: 3000
+  rpcs: 
+    ethereum: "https://main-light.eth.linkpool.io/"
+    moonbeam: "https://rpc.api.moonbeam.network"
+    kovan: "https://kovan.infura.io/v3/5f65182f06a14f5182a2e9af8d8fff33"
+    rinkeby: "https://rinkeby.infura.io/v3/5f65182f06a14f5182a2e9af8d8fff33"
+    moonbasealpha: "https://moonbeam-alpha.api.onfinality.io/public"
+  api: 
+    ingress: 
+      enabled: true
+      staticIPName: "test"
+      domains: [ "bridge-indexer.dev.madlads.tools"]
+
+postgresql: 
+  postgresqlUsername: postgres
+  postgresqlPassword: postgres 
+  postgresqlDatabase: nomad-indexer
+
+podAnnotations: {}
+podCommonLabels: {}
+
+storage:
+  storageClass: "standard"
+  accessModes: ReadWriteOnce
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources:
+  {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

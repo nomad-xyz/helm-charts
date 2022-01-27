@@ -43,3 +43,6 @@ spec:
         envFrom:
         - configMapRef:
             name: {{.Release.Name }}-indexer-env
+        ports: 
+        - name: metrics
+          containerPort: 3000

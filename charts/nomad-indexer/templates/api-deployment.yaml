@@ -34,5 +34,5 @@ spec:
         - configMapRef:
             name: {{.Release.Name }}-indexer-api-env
         ports: 
-        - name: metrics
-          containerPort: 9090
+        - name: api
+          containerPort: 3000

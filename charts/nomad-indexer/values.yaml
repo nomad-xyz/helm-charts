@@ -37,7 +37,11 @@ postgresql:
   postgresqlPassword: postgres 
   postgresqlDatabase: nomad-indexer
 
-podAnnotations: {}
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "3000"
+  prometheus.io/path: "/metrics"
+
 podCommonLabels: {}
 
 storage:

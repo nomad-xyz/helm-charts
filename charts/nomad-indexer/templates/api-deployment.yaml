@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.environment }}-indexer-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      environment: {{ .Values.environment }}
+      app.kubernetes.io/component: indexer-api
+  template:
+    metadata:
+      {{- with $.Values.podAnnotations }}
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/api-configmap.yaml") . | sha256sum }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        environment: {{ .Values.environment }}
+        app.kubernetes.io/component: indexer-api
+    spec:
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: api
+        image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+        imagePullPolicy: {{ $.Values.image.pullPolicy }}
+        command: ["npm", "run", "start", "indexer"]
+        resources:
+          {{- toYaml $.Values.resources | nindent 12 }}
+        envFrom:
+        - configMapRef:
+            name: {{.Release.Name }}-indexer-api-env
+        ports: 
+        - name: metrics
+          containerPort: 9090

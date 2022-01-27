@@ -1,0 +1,14 @@
+apiVersion: v1 
+kind: ConfigMap 
+metadata:
+  name: {{.Release.Name }}-indexer-api-env
+data:
+  ENVIRONMENT: {{ .Values.environment | quote }}
+
+  PORT: {{ .Values.indexer.internalPort | quote }}
+  PROGRAM: "api"
+  PGHOST: {{ tpl .Values.indexer.db.host . | quote }}
+  PGUSER: {{ .Values.indexer.db.user | quote }}
+  PGDATABASE: {{ .Values.indexer.db.database | quote }}
+  PGPASSWORD: {{ .Values.indexer.db.password | quote }}
+  PGPORT: {{ .Values.indexer.db.port | quote }}

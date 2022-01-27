@@ -1,27 +1,27 @@
     apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Values.indexer.environment }}-nomad-indexer
+  name: {{ .Values.environment }}-indexer
   labels:
-    environment: {{ .Values.indexer.environment }}
-    app.kubernetes.io/component: nomad-indexer
+    environment: {{ .Values.environment }}
+    app.kubernetes.io/component: indexer
 spec:
   selector:
     matchLabels:
-      environment: {{ .Values.indexer.environment }}
-      app.kubernetes.io/component: nomad-indexer
+      environment: {{ .Values.environment }}
+      app.kubernetes.io/component: indexer
   replicas: 1 
-  serviceName: {{ .Values.indexer.environment }}-nomad-indexer
+  serviceName: {{ .Values.environment }}-indexer
   template:
     metadata:
       annotations:
-        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/indexer-configmap.yaml") . | sha256sum }}
         {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
       labels:
-        environment: {{ .Values.indexer.environment }}
-        app.kubernetes.io/component: nomad-indexer
+        environment: {{ .Values.environment }}
+        app.kubernetes.io/component: indexer
         {{- with .Values.podCommonLabels }}
         {{ toYaml . | nindent 8 }}
         {{- end }}
@@ -42,26 +42,4 @@ spec:
         command: ["npm", "run", "start", "indexer"]
         envFrom:
         - configMapRef:
-            name: {{.Release.Name}}-environment
-      {{- if .Values.cloudsqlProxy.enabled }}
-      - name: cloud-sql-proxy
-        image: {{ .Values.cloudsqlProxy.image.repository }}:{{ .Values.cloudsqlProxy.image.tag }}
-        command:
-          - "/cloud_sql_proxy"
-          - "-instances={{ .Values.cloudsqlProxy.connection.name }}=tcp:{{ .Values.cloudsqlProxy.connection.port }}"
-          - "-credential_file=/secrets/service_account.json"
-        securityContext:
-          runAsNonRoot: true
-        resources:
-          requests:
-            memory: "2Gi"
-            cpu:    "1"
-        volumeMounts:
-        - name: {{.Release.Name}}-service-account
-          mountPath: /secrets/
-          readOnly: true
-      volumes:
-      - name: {{.Release.Name}}-service-account
-        configMap:
-          name: {{.Release.Name}}-service-account
-      {{- end }}
+            name: {{.Release.Name }}-indexer-env

@@ -1,7 +1,7 @@
 image:
   repository: gcr.io/nomad-xyz/nomad-indexer
   pullPolicy: Always
-  tag: "latest"
+  tag: "sha-d7eefa04"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -12,32 +12,27 @@ serviceAccount:
   annotations: {}
   name: ""
 
+environment: development
 indexer: 
-  environment: development
-  internalPort: 3000
-  rpcs: 
-    ethereum: ""
-    moonbeam: ""
-    kovan: ""
-    rinkeby: ""
-    moonbasealpha: ""
-  postgres: 
-    host: postgres
+  db: 
+    host:  "{{ .Release.Name }}-postgresql"
     user: postgres
     password: postgres
     database: nomad-indexer
     port: 5432
-
-cloudsqlProxy:  
-  enabled: false
-  image: 
-    repository: gcr.io/cloudsql-docker/gce-proxy
-    tag: "1.17"
-  serviceAccountJson: ""
-  connection:
-    name: ""
-    port: 5432
+  internalPort: 3000
+  rpcs: 
+    ethereum: "https://main-light.eth.linkpool.io/"
+    moonbeam: "https://rpc.api.moonbeam.network"
+    kovan: "https://kovan.infura.io"
+    rinkeby: "https://rinkeby.infura.io"
+    moonbasealpha: "https://moonbeam-alpha.api.onfinality.io/public"
+  api: 
   
+postgresql: 
+  postgresqlUsername: postgres
+  postgresqlPassword: postgres 
+  postgresqlDatabase: nomad-indexer
 
 podAnnotations: {}
 podCommonLabels: {}

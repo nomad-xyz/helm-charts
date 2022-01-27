@@ -1,7 +1,7 @@
 apiVersion: v1 
 kind: ConfigMap 
 metadata:
-  name: {{.Release.Name}}-indexer-env
+  name: {{ .Release.Name }}-indexer-env
 data:
   {{- if .Values.indexer.rpcs.ethereum }}
   ETHEREUM_RPC: {{ .Values.indexer.rpcs.ethereum | quote }}

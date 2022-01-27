@@ -1,7 +1,7 @@
     apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Values.environment }}-indexer
+  name: {{ .Release.Name }}-indexer
   labels:
     environment: {{ .Values.environment }}
     app.kubernetes.io/component: indexer
@@ -11,7 +11,7 @@ spec:
       environment: {{ .Values.environment }}
       app.kubernetes.io/component: indexer
   replicas: 1 
-  serviceName: {{ .Values.environment }}-indexer
+  serviceName: {{ .Release.Name }}-indexer
   template:
     metadata:
       annotations:
@@ -37,8 +37,8 @@ spec:
       - name: indexer
         securityContext:
           {{- toYaml .Values.securityContext | nindent 10 }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        image: "{{ .Values.indexer.image.repository }}:{{ .Values.indexer.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.indexer.image.pullPolicy }}
         command: ["npm", "run", "start", "indexer"]
         envFrom:
         - configMapRef:

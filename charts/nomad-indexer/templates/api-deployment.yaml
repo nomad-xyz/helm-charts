@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.environment }}-indexer-api
+  name: {{ .Release.Name }}-indexer-api
 spec:
   replicas: 1
   selector:
@@ -25,8 +25,8 @@ spec:
       {{- end }}
       containers:
       - name: api
-        image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
-        imagePullPolicy: {{ $.Values.image.pullPolicy }}
+        image: "{{ $.Values.indexer.image.repository }}:{{ $.Values.indexer.image.tag | default $.Chart.AppVersion }}"
+        imagePullPolicy: {{ $.Values.indexer.image.pullPolicy }}
         command: ["npm", "run", "start", "indexer"]
         resources:
           {{- toYaml $.Values.resources | nindent 12 }}

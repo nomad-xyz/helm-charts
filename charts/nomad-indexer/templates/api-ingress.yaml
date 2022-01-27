@@ -6,7 +6,8 @@ spec:
   type: NodePort
   ports:
   - protocol: TCP
-    targetPort: api
+    port: 8000
+    targetPort: 3000
   selector:
     environment: {{ .Values.environment }}
     app.kubernetes.io/component: indexer-api

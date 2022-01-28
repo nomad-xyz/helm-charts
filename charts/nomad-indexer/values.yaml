@@ -47,6 +47,10 @@ podCommonLabels: {}
 storage:
   storageClass: "standard"
   accessModes: ReadWriteOnce
+  size: 10Gi
+  snapshot:
+    enabled: false
+    name: ""
 
 podSecurityContext:
   fsGroup: 2000

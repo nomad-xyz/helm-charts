@@ -20,6 +20,7 @@ indexer:
     database: nomad-indexer
     port: 5432
   internalPort: 3000
+  rpc_batch_size: 2000
   rpcs: 
     ethereum: "https://main-light.eth.linkpool.io/"
     moonbeam: "https://rpc.api.moonbeam.network"

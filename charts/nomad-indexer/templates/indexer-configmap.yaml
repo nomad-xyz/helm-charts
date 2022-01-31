@@ -21,6 +21,7 @@ data:
   ENVIRONMENT: {{ .Values.environment | quote }}
 
   PORT: {{ .Values.indexer.internalPort | quote }}
+  BATCH_SIZE: {{ .Values.indexer.rpc_batch_size | quote }}
   PROGRAM: "core"
   PGHOST: {{ tpl .Values.indexer.db.host . | quote }}
   PGUSER: {{ .Values.indexer.db.user | quote }}

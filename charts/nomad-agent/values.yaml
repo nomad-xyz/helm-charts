@@ -205,6 +205,35 @@ nomad:
       recipient: # "recipient"
       type: # "static"
 
+  watcher:
+    enabled: false
+    podAnnotations: {}
+    podLabels: {}
+    storage:
+      size: 10Gi
+      snapshot:
+        enabled: false
+        name: ""
+    resources:
+      limits:
+        cpu: 50m
+        memory: 50Mi
+      requests:
+        cpu: 10m
+        memory: 20Mi
+    transactionSigners:
+      - name: "kovan"
+        hexKey: ""
+        aws:
+          keyId: ""
+          region: ""
+      - name: "alfajores"
+        hexKey: ""
+        aws:
+          keyId: ""
+          region: ""
+    pollingInterval: # 10
+
 podSecurityContext:
   fsGroup: 2000
 

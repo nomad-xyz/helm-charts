@@ -232,6 +232,12 @@ nomad:
         aws:
           keyId: ""
           region: ""
+    # -- Specialized key used by updater and watcher used to sign attestations, separate from updater.transactionSigners
+    attestationSigner:
+      hexKey: ""
+      aws:
+        keyId: ""
+        region: ""
     pollingInterval: # 10
 
 podSecurityContext:

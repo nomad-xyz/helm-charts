@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-indexer-api
 spec:
-  replicas: 1
+  replicas: {{ .Values.indexer.api.replicas }}
   selector:
     matchLabels:
       environment: {{ .Values.environment }}

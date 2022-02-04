@@ -29,6 +29,7 @@ indexer:
     moonbasealpha: "https://moonbeam-alpha.api.onfinality.io/public"
     milkomedatestnet: "http://use-util.cloud.milkomeda.com:8545"
   api: 
+    replicas: 1
     ingress: 
       enabled: true
       staticIPName: "test"

@@ -27,6 +27,7 @@ indexer:
     kovan: "https://kovan.infura.io/v3/5f65182f06a14f5182a2e9af8d8fff33"
     rinkeby: "https://rinkeby.infura.io/v3/5f65182f06a14f5182a2e9af8d8fff33"
     moonbasealpha: "https://moonbeam-alpha.api.onfinality.io/public"
+    milkomedatestnet: "http://use-util.cloud.milkomeda.com:8545"
   api: 
     ingress: 
       enabled: true

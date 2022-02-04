@@ -18,13 +18,12 @@ data:
   {{- if .Values.indexer.rpcs.moonbasealpha | quote }}
   MOONBASEALPHA_RPC: {{ .Values.indexer.rpcs.moonbasealpha | quote }}
   {{- end }}
+  {{- if .Values.indexer.rpcs.milkomedatestnet | quote }}
+  MILKOMEDATESTNET_RPC: {{ .Values.indexer.rpcs.milkomedatestnet | quote }}
+  {{- end }}
   ENVIRONMENT: {{ .Values.environment | quote }}
 
   PORT: {{ .Values.indexer.internalPort | quote }}
   BATCH_SIZE: {{ .Values.indexer.rpc_batch_size | quote }}
   PROGRAM: "core"
-  PGHOST: {{ tpl .Values.indexer.db.host . | quote }}
-  PGUSER: {{ .Values.indexer.db.user | quote }}
-  PGDATABASE: {{ .Values.indexer.db.database | quote }}
-  PGPASSWORD: {{ .Values.indexer.db.password | quote }}
-  PGPORT: {{ .Values.indexer.db.port | quote }}
+  DATABASE_URL: postgres://{{ .Values.indexer.db.user }}:{{ .Values.indexer.db.password }}@{{ tpl .Values.indexer.db.host . }}:{{ .Values.indexer.db.port }}/{{ .Values.indexer.db.database }}?connect_timeout=300&schema=public

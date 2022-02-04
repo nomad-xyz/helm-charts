@@ -13,6 +13,16 @@ entries:
     version: 0.1.0
   nomad-agent:
   - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-02-04T00:23:29.952889295Z"
+    description: A Helm Chart that encapsulates the deployment of the Nomad Rust Agent(s)
+    digest: b17a7e032a511cf07a60b2b80baedf3864790526f90ac82bdaf0dfcb04564219
+    name: nomad-agent
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-agent-0.1.6/nomad-agent-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
     appVersion: 0.1.5
     created: "2022-01-28T17:41:11.955768805Z"
     description: A Helm Chart that encapsulates the deployment of the Nomad Rust Agent(s)
@@ -172,4 +182,4 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-monitor-0.1.0/nomad-monitor-0.1.0.tgz
     version: 0.1.0
-generated: "2022-02-02T21:45:07.982172945Z"
+generated: "2022-02-04T00:23:29.953162893Z"

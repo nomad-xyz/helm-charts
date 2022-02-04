@@ -68,6 +68,17 @@ spec:
             value: {{ .aws.region }}
           {{- end }}
           {{- end }}
+          {{- if .Values.nomad.watcher.attestationSigner.hexKey }}
+          - name: OPT_BASE_WATCHER_KEY
+            value: {{ .Values.nomad.watcher.attestationSigner.hexKey }}
+          {{- else }}
+          - name: OPT_BASE_WATCHER_TYPE
+            value: "aws"
+          - name: OPT_BASE_WATCHER_ID
+            value: {{ .Values.nomad.watcher.attestationSigner.aws.keyId  }}
+          - name: OPT_BASE_WATCHER_REGION
+            value: {{ .Values.nomad.watcher.attestationSigner.aws.region }}
+          {{- end }}
           {{- if .Values.nomad.tracing.uri }}
           - name: OPT_BASE_TRACING_JAEGER_NAME
             value: {{ include "nomad-agent.fullname" . }}-watcher

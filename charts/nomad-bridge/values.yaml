@@ -1,0 +1,101 @@
+
+## @param nameOverride String to partially override agent.fullname template with a string (will prepend the release name)
+##
+nameOverride: ""
+
+## @param fullnameOverride String to fully override agent.fullname template with a string
+##
+fullnameOverride: ""
+
+## Configure Pods Security Context
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+## @param podSecurityContext.enabled Enable pod security context
+## @param podSecurityContext.fsGroup fsGroup ID for the pod
+##
+podSecurityContext:
+  enabled: true
+  fsGroup: 1001
+
+## Configure Container Security Context (only main container)
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
+## @param containerSecurityContext.enabled Enable container security context
+## @param containerSecurityContext.runAsUser User ID for the container
+##
+containerSecurityContext:
+  enabled: true
+  runAsUser: 1001
+
+## @param storage.storageClass StorageClass for Persistent Volume(s)
+## @param storage.accessModes AccessModes for Persistent Volume(s)
+## @param storage.capacity Storage capacity allocated for Persistent Volume(s)
+##
+storage:
+  storageClass: standard
+  accessModes: ReadWriteOnce
+  capacity: 10Gi
+  mountPath: /usr/share/nomad
+
+## @param commonLabels Add extra labels to all pods
+##
+commonLabels: {}
+
+## @param commonAnnotations Add extra annotations to all pods
+##
+commonAnnotations:
+  prometheus.io/scrape: 'true'
+  prometheus.io/port: '9090'
+
+metrics:
+  port: '9090'
+
+## @param commonEnvVars Common environment variables to add all pods
+##
+commonEnvVars: []
+
+## --------------------------------
+## @section Bridge Kathy parameters
+kathy:
+
+  ## @param kathy.enabled Enable Nomad Agent (Kathy). Should to be deployed against a testnet environment only
+  ##
+  enabled: false
+
+  ## Nomad Agent (Kathy) image version
+  ## @param kathy.image.registry Nomad Agent (Kathy) image registry
+  ## @param kathy.image.repository Nomad Agent (Kathy) image repository
+  ## @param kathy.image.tag Nomad Agent (Kathy) image tag (immutable tags are recommended)
+  ## @param kathy.image.pullPolicy Nomad Agent (Kathy) image pull policy
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/nomad-agent
+    tag: latest
+    pullPolicy: Always
+  
+  ## @param kathy.envVars Environment variables to add Nomad Agent (Kathy) pod
+  ##
+  envVars: []
+
+  ## Kathy container' resource requests and limits
+  ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param kathy.resources.limits The resources limits for the Kathy pod
+  ## @param kathy.resources.requests The requested resources for the Kathy pod
+  ##
+  resources:
+    ## Example:
+    ## limits:
+    ##   cpu: 50m
+    ##   memory: 50Mi
+    limits: {}
+    ## Examples:
+    ## requests:
+    ##   cpu: 10m
+    ##   memory: 20Mi
+    requests: {}
+
+  ## @param kathy.podLabels Add extra labels to the pods
+  ##
+  podLabels: {}
+
+  ## @param kathy.podAnnotations Add extra annotations to the pod
+  ##
+  podAnnotations: {}

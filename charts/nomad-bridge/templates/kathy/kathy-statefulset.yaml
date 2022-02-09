@@ -1,0 +1,77 @@
+{{- if .Values.kathy.enabled }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "agent.fullname" . }}-kathy
+  labels: {{- include "agent.labels" . | nindent 4 }}
+    app.kubernetes.io/component: kathy
+spec:
+  selector:
+    matchLabels: {{- include "agent.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: kathy
+  replicas: 1
+  serviceName: {{ include "agent.fullname" . }}-kathy-svc
+  template:
+    metadata:
+      annotations:
+        {{- with .Values.commonAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.kathy.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels: {{- include "agent.labels" . | nindent 8 }}
+        app.kubernetes.io/component: kathy
+        {{- with .Values.commonLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.kathy.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      {{- if .Values.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.kathy.image.registry }}/{{ .Values.kathy.image.repository }}:{{ .Values.kathy.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.kathy.image.pullPolicy }}
+          {{- if .Values.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
+          command: ["./kathy"]
+          env: 
+          {{- toYaml .Values.commonEnvVars | nindent 12 }}
+          {{- toYaml .Values.kathy.envVars | nindent 12 }}
+          {{- if .Values.kathy.resources }}
+          resources: {{- toYaml .Values.kathy.resources | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: state
+              mountPath: {{ .Values.storage.mountPath }}
+          ports: 
+            - name: metrics
+              containerPort: {{ .Values.metrics.port }}
+      {{- with .Values.kathy.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.kathy.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.kathy.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  volumeClaimTemplates:
+  - metadata:
+      name: state
+    spec:
+      storageClassName: {{ .Values.storage.storageClass }}
+      accessModes: [ {{ .Values.storage.accessModes }} ]
+      resources:
+        requests:
+          storage: {{ .Values.storage.capacity }}
+{{- end }}

@@ -99,3 +99,52 @@ kathy:
   ## @param kathy.podAnnotations Add extra annotations to the pod
   ##
   podAnnotations: {}
+
+
+## --------------------------------
+## @section Bridge Watcher parameters
+watcher:
+
+  ## @param watcher.enabled Enable Nomad Agent (Watcher). Should to be deployed against a testnet environment only
+  ##
+  enabled: false
+
+  ## Nomad Agent (Watcher) image version
+  ## @param watcher.image.registry Nomad Agent (Watcher) image registry
+  ## @param watcher.image.repository Nomad Agent (Watcher) image repository
+  ## @param watcher.image.tag Nomad Agent (Watcher) image tag (immutable tags are recommended)
+  ## @param watcher.image.pullPolicy Nomad Agent (Watcher) image pull policy
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/nomad-agent
+    tag: latest
+    pullPolicy: Always
+  
+  ## @param watcher.envVars Environment variables to add Nomad Agent (Watcher) pod
+  ##
+  envVars: []
+
+  ## Watcher container' resource requests and limits
+  ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param watcher.resources.limits The resources limits for the Watcher pod
+  ## @param watcher.resources.requests The requested resources for the Watcher pod
+  ##
+  resources:
+    ## Example:
+    ## limits:
+    ##   cpu: 50m
+    ##   memory: 50Mi
+    limits: {}
+    ## Examples:
+    ## requests:
+    ##   cpu: 10m
+    ##   memory: 20Mi
+    requests: {}
+
+  ## @param watcher.podLabels Add extra labels to the pods
+  ##
+  podLabels: {}
+
+  ## @param watcher.podAnnotations Add extra annotations to the pod
+  ##
+  podAnnotations: {}

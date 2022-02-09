@@ -52,6 +52,154 @@ metrics:
 ##
 commonEnvVars: []
 
+
+## --------------------------------
+## @section Bridge processor parameters
+processor:
+
+  ## @param processor.enabled Enable Nomad Agent (Processor).
+  ##
+  enabled: true
+
+  ## Nomad Agent (Processor) image version
+  ## @param processor.image.registry Nomad Agent (Processor) image registry
+  ## @param processor.image.repository Nomad Agent (Processor) image repository
+  ## @param processor.image.tag Nomad Agent (Processor) image tag (immutable tags are recommended)
+  ## @param processor.image.pullPolicy Nomad Agent (Processor) image pull policy
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/nomad-agent
+    tag: latest
+    pullPolicy: Always
+  
+  ## @param processor.envVars Environment variables to add Nomad Agent (Processor) pod
+  ##
+  envVars: []
+
+  ## Processor container' resource requests and limits
+  ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param processor.resources.limits The resources limits for the Processor pod
+  ## @param processor.resources.requests The requested resources for the Processor pod
+  ##
+  resources:
+    ## Example:
+    ## limits:
+    ##   cpu: 50m
+    ##   memory: 50Mi
+    limits: {}
+    ## Examples:
+    ## requests:
+    ##   cpu: 10m
+    ##   memory: 20Mi
+    requests: {}
+
+  ## @param processor.podLabels Add extra labels to the pods
+  ##
+  podLabels: {}
+
+  ## @param processor.podAnnotations Add extra annotations to the pod
+  ##
+  podAnnotations: {}
+
+
+## --------------------------------
+## @section Bridge relayer parameters
+relayer:
+
+  ## @param relayer.enabled Enable Nomad Agent (Relayer).
+  ##
+  enabled: true
+
+  ## Nomad Agent (Processor) image version
+  ## @param relayer.image.registry Nomad Agent (Relayer) image registry
+  ## @param relayer.image.repository Nomad Agent (Relayer) image repository
+  ## @param relayer.image.tag Nomad Agent (Relayer) image tag (immutable tags are recommended)
+  ## @param relayer.image.pullPolicy Nomad Agent (Relayer) image pull policy
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/nomad-agent
+    tag: latest
+    pullPolicy: Always
+  
+  ## @param relayer.envVars Environment variables to add Nomad Agent (Relayer) pod
+  ##
+  envVars: []
+
+  ## Processor container' resource requests and limits
+  ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param relayer.resources.limits The resources limits for the Relayer pod
+  ## @param relayer.resources.requests The requested resources for the Relayer pod
+  ##
+  resources:
+    ## Example:
+    ## limits:
+    ##   cpu: 50m
+    ##   memory: 50Mi
+    limits: {}
+    ## Examples:
+    ## requests:
+    ##   cpu: 10m
+    ##   memory: 20Mi
+    requests: {}
+
+  ## @param relayer.podLabels Add extra labels to the pods
+  ##
+  podLabels: {}
+
+  ## @param relayer.podAnnotations Add extra annotations to the pod
+  ##
+  podAnnotations: {}
+
+
+## --------------------------------
+## @section Bridge updater parameters
+updater:
+
+  ## @param updater.enabled Enable Nomad Agent (updater).
+  ##
+  enabled: true
+
+  ## Nomad Agent (updater) image version
+  ## @param updater.image.registry Nomad Agent (updater) image registry
+  ## @param updater.image.repository Nomad Agent (updater) image repository
+  ## @param updater.image.tag Nomad Agent (updater) image tag (immutable tags are recommended)
+  ## @param updater.image.pullPolicy Nomad Agent (updater) image pull policy
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/nomad-agent
+    tag: latest
+    pullPolicy: Always
+  
+  ## @param updater.envVars Environment variables to add Nomad Agent (updater) pod
+  ##
+  envVars: []
+
+  ## Processor container' resource requests and limits
+  ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param updater.resources.limits The resources limits for the updater pod
+  ## @param updater.resources.requests The requested resources for the updater pod
+  ##
+  resources:
+    ## Example:
+    ## limits:
+    ##   cpu: 50m
+    ##   memory: 50Mi
+    limits: {}
+    ## Examples:
+    ## requests:
+    ##   cpu: 10m
+    ##   memory: 20Mi
+    requests: {}
+
+  ## @param updater.podLabels Add extra labels to the pods
+  ##
+  podLabels: {}
+
+  ## @param updater.podAnnotations Add extra annotations to the pod
+  ##
+  podAnnotations: {}
+
+
 ## --------------------------------
 ## @section Bridge Kathy parameters
 kathy:

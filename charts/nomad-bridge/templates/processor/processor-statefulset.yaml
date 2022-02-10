@@ -42,8 +42,12 @@ spec:
           {{- end }}
           command: ["./processor"]
           env: 
-          {{- toYaml .Values.commonEnvVars | nindent 12 }}
-          {{- toYaml .Values.processor.envVars | nindent 12 }}
+          {{- with .Values.commonEnvVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.processor.envVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- if .Values.processor.resources }}
           resources: {{- toYaml .Values.processor.resources | nindent 12 }}
           {{- end }}

@@ -42,8 +42,12 @@ spec:
           {{- end }}
           command: ["./kathy"]
           env: 
-          {{- toYaml .Values.commonEnvVars | nindent 12 }}
-          {{- toYaml .Values.kathy.envVars | nindent 12 }}
+          {{- with .Values.commonEnvVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.kathy.envVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- if .Values.kathy.resources }}
           resources: {{- toYaml .Values.kathy.resources | nindent 12 }}
           {{- end }}

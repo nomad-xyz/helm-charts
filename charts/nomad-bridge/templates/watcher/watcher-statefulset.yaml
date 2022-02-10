@@ -42,8 +42,12 @@ spec:
           {{- end }}
           command: ["./watcher"]
           env: 
-          {{- toYaml .Values.commonEnvVars | nindent 12 }}
-          {{- toYaml .Values.watcher.envVars | nindent 12 }}
+          {{- with .Values.commonEnvVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.watcher.envVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- if .Values.watcher.resources }}
           resources: {{- toYaml .Values.watcher.resources | nindent 12 }}
           {{- end }}

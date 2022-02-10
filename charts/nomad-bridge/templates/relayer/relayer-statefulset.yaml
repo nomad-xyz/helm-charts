@@ -42,8 +42,12 @@ spec:
           {{- end }}
           command: ["./relayer"]
           env: 
-          {{- toYaml .Values.commonEnvVars | nindent 12 }}
-          {{- toYaml .Values.relayer.envVars | nindent 12 }}
+          {{- with .Values.commonEnvVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.relayer.envVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- if .Values.relayer.resources }}
           resources: {{- toYaml .Values.relayer.resources | nindent 12 }}
           {{- end }}

@@ -83,16 +83,12 @@ processor:
   # processor.resources -- Processor container's resource requests and limits
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
-    ## Example:
-    ## limits:
-    ##   cpu: 50m
-    ##   memory: 50Mi
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##   cpu: 10m
-    ##   memory: 20Mi
-    requests: {}
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
 
   # processor.podLabels -- Add extra labels to the pods
   podLabels: {}
@@ -121,16 +117,12 @@ relayer:
   # relayer.resources -- Relayer container's resource requests and limits
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
-    ## Example:
-    ## limits:
-    ##   cpu: 50m
-    ##   memory: 50Mi
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##   cpu: 10m
-    ##   memory: 20Mi
-    requests: {}
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
 
   # relayer.podLabels -- Add extra labels to the pods
   podLabels: {}
@@ -159,16 +151,12 @@ updater:
    # updater.resources -- Updater container's resource requests and limits
    # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
-    ## Example:
-    ## limits:
-    ##   cpu: 50m
-    ##   memory: 50Mi
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##   cpu: 10m
-    ##   memory: 20Mi
-    requests: {}
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
 
   # updater.podLabels -- Add extra labels to the pods
   podLabels: {}
@@ -197,16 +185,12 @@ kathy:
   # kathy.resources -- Kathy container's resource requests and limits
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
-    ## Example:
-    ## limits:
-    ##   cpu: 50m
-    ##   memory: 50Mi
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##   cpu: 10m
-    ##   memory: 20Mi
-    requests: {}
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
 
   # kathy.podLabels -- Add extra labels to the pods
   podLabels: {}
@@ -220,7 +204,6 @@ kathy:
 watcher:
 
   # watcher.enabled -- Enable Nomad agent watcher
-
   enabled: false
 
   # watcher.envVars -- Environment variables to add Nomad agent watcher pod
@@ -236,16 +219,12 @@ watcher:
   # watcher.resources -- Watcher container's resource requests and limits
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
-    ## Example:
-    ## limits:
-    ##   cpu: 50m
-    ##   memory: 50Mi
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##   cpu: 10m
-    ##   memory: 20Mi
-    requests: {}
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
 
   # watcher.podLabels -- Add extra labels to the pods
   podLabels: {}

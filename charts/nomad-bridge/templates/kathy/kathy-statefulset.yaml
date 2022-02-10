@@ -41,6 +41,9 @@ spec:
           securityContext: {{- omit .Values.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
           command: ["./kathy"]
+          envFrom:
+            - secretRef:
+                name: {{ include "agent.fullname" . }}-awscreds
           env: 
           {{- with .Values.commonEnvVars }}
           {{- toYaml . | nindent 12 }}

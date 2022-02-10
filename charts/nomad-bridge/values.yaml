@@ -45,13 +45,21 @@ commonAnnotations:
   prometheus.io/scrape: 'true'
   prometheus.io/port: '9090'
 
-metrics:
-  port: '9090'
-
 ## @param commonEnvVars Common environment variables to add all pods
 ##
 commonEnvVars: []
 
+## @param metrics.port Container port exposing Nomad agent metrics
+##
+metrics:
+  port: '9090'
+
+## @param aws Base64 encoded AWS Credentials used by Nomad agent to sign transactions and store proofs to S3
+## Example:
+## aws:
+##   AWS_ACCESS_KEY_ID: '1234567890'
+##   AWS_SECRET_ACCESS_KEY: 'abcdefghijklmnopqrstuvwxyz'
+aws: {}
 
 ## --------------------------------
 ## @section Bridge processor parameters

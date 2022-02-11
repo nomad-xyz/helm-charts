@@ -1,0 +1,84 @@
+{{- if .Values.relayer.enabled }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "agent.fullname" . }}-relayer
+  labels: {{- include "agent.labels" . | nindent 4 }}
+    app.kubernetes.io/component: relayer
+spec:
+  selector:
+    matchLabels: {{- include "agent.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: relayer
+  replicas: 1
+  serviceName: {{ include "agent.fullname" . }}-relayer-svc
+  template:
+    metadata:
+      annotations:
+        {{- with .Values.commonAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.relayer.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels: {{- include "agent.labels" . | nindent 8 }}
+        app.kubernetes.io/component: relayer
+        {{- with .Values.commonLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.relayer.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      {{- if .Values.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: nomad-agent
+          image: "{{ .Values.relayer.image.registry }}/{{ .Values.relayer.image.repository }}:{{ .Values.relayer.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.relayer.image.pullPolicy }}
+          {{- if .Values.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
+          command: ["./relayer"]
+          envFrom:
+            - secretRef:
+                name: {{ include "agent.fullname" . }}-awscreds
+          env: 
+          {{- with .Values.commonEnvVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.relayer.envVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.relayer.resources }}
+          resources: {{- toYaml .Values.relayer.resources | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: state
+              mountPath: {{ .Values.storage.mountPath }}
+          ports: 
+            - name: metrics
+              containerPort: {{ .Values.metrics.port }}
+      {{- with .Values.relayer.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.relayer.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.relayer.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  volumeClaimTemplates:
+  - metadata:
+      name: state
+    spec:
+      storageClassName: {{ .Values.storage.storageClass }}
+      accessModes: [ {{ .Values.storage.accessModes }} ]
+      resources:
+        requests:
+          storage: {{ .Values.storage.capacity }}
+{{- end }}

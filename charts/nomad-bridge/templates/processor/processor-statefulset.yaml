@@ -1,0 +1,84 @@
+{{- if .Values.processor.enabled }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "agent.fullname" . }}-processor
+  labels: {{- include "agent.labels" . | nindent 4 }}
+    app.kubernetes.io/component: processor
+spec:
+  selector:
+    matchLabels: {{- include "agent.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: processor
+  replicas: 1
+  serviceName: {{ include "agent.fullname" . }}-processor-svc
+  template:
+    metadata:
+      annotations:
+        {{- with .Values.commonAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.processor.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels: {{- include "agent.labels" . | nindent 8 }}
+        app.kubernetes.io/component: processor
+        {{- with .Values.commonLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.processor.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      {{- if .Values.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: nomad-agent
+          image: "{{ .Values.processor.image.registry }}/{{ .Values.processor.image.repository }}:{{ .Values.processor.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.processor.image.pullPolicy }}
+          {{- if .Values.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
+          command: ["./processor"]
+          envFrom:
+            - secretRef:
+                name: {{ include "agent.fullname" . }}-awscreds
+          env: 
+          {{- with .Values.commonEnvVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.processor.envVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.processor.resources }}
+          resources: {{- toYaml .Values.processor.resources | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: state
+              mountPath: {{ .Values.storage.mountPath }}
+          ports: 
+            - name: metrics
+              containerPort: {{ .Values.metrics.port }}
+      {{- with .Values.processor.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.processor.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.processor.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  volumeClaimTemplates:
+  - metadata:
+      name: state
+    spec:
+      storageClassName: {{ .Values.storage.storageClass }}
+      accessModes: [ {{ .Values.storage.accessModes }} ]
+      resources:
+        requests:
+          storage: {{ .Values.storage.capacity }}
+{{- end }}

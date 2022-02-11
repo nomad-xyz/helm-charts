@@ -1,0 +1,233 @@
+
+# nameOverride -- String to partially override agent.fullname template with a string (will prepend the release name)
+#
+nameOverride: ""
+
+# fullnameOverride -- String to fully override agent.fullname template with a string
+#
+fullnameOverride: ""
+
+# -- Configure Pods Security Context
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+#
+podSecurityContext:
+  # podSecurityContext.enabled -- Enable pod security context
+  enabled: true
+  # podSecurityContext.fsGroup -- fsGroup ID for the pod
+  fsGroup: 1001
+
+# -- Configure Container Security Context (only main container)
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
+#
+containerSecurityContext:
+  # containerSecurityContext.enabled -- Enable container security context
+  enabled: true
+  # containerSecurityContext.runAsUser -- User ID for the container  
+  runAsUser: 1001
+
+# storage -- Persistent Storage pod configuration
+#
+storage:
+  # storage.storageClass -- StorageClass for Persistent Volume(s)
+  storageClass: standard
+  # storage.accessModes -- AccessModes for Persistent Volume(s)
+  accessModes: ReadWriteOnce
+  # storage.capacity -- Storage capacity allocated for Persistent Volume(s)
+  capacity: 10Gi
+  # storage.capacity -- Mount path for Nomad DB Persistent Volume(s) 
+  mountPath: /usr/share/nomad
+
+# commonLabels -- Add extra labels to all pods
+#
+commonLabels: {}
+
+# commonAnnotations -- Add extra annotations to all pods
+#
+commonAnnotations:
+  prometheus.io/scrape: 'true'
+  prometheus.io/port: '9090'
+
+# commonEnvVars -- Common environment variables to add all pods
+#
+commonEnvVars: []
+
+# metrics -- Container port exposing Nomad agent metrics
+#
+metrics:
+  port: '9090'
+
+# aws -- Base64 encoded AWS Credentials used by Nomad agent to sign transactions and store proofs to S3
+## Example:
+## aws:
+##   AWS_ACCESS_KEY_ID: '1234567890'
+##   AWS_SECRET_ACCESS_KEY: 'abcdefghijklmnopqrstuvwxyz'
+aws: {}
+
+
+# Processor configuration
+#
+processor:
+
+  # processor.enabled -- Enable Nomad agent processor
+  enabled: true
+
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/nomad-agent
+    tag: latest
+    pullPolicy: Always
+  
+  # processor.envVars -- Environment variables to add Nomad agent processor pod
+  envVars: []
+
+  # processor.resources -- Processor container's resource requests and limits
+  # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  resources:
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+
+  # processor.podLabels -- Add extra labels to the pods
+  podLabels: {}
+
+  # processor.podAnnotations -- Add extra annotations to the pod
+  podAnnotations: {}
+
+
+# Relayer configuration
+#
+relayer:
+
+  # relayer.enabled -- Enable Nomad agent relayer
+  enabled: true
+
+  # relayer.image -- Nomad agent relayer docker image configuration (immutable image tags are recommended)
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/nomad-agent
+    tag: latest
+    pullPolicy: Always
+  
+  # relayer.envVars -- Environment variables to add Nomad agent relayer pod
+  envVars: []
+
+  # relayer.resources -- Relayer container's resource requests and limits
+  # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  resources:
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+
+  # relayer.podLabels -- Add extra labels to the pods
+  podLabels: {}
+
+  # relayer.podAnnotations -- Add extra annotations to the pod
+  podAnnotations: {}
+
+
+# Updater configuration
+#
+updater:
+
+  # updater.enabled -- Enable Nomad agent updater
+  enabled: true
+
+   # updater.image -- Nomad agent updater docker image configuration (immutable image tags are recommended)
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/nomad-agent
+    tag: latest
+    pullPolicy: Always
+  
+  # updater.envVars -- Environment variables to add Nomad agent updater pod
+  envVars: []
+
+   # updater.resources -- Updater container's resource requests and limits
+   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  resources:
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+
+  # updater.podLabels -- Add extra labels to the pods
+  podLabels: {}
+
+  # updater.podAnnotations -- Add extra annotations to the pod
+  podAnnotations: {}
+
+
+# Kathy configuration
+#
+kathy:
+
+  # kathy.enabled -- Enable Nomad agent kathy
+  enabled: false
+
+  # kathy.image -- Nomad agent kathy docker image configuration (immutable image tags are recommended)
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/nomad-agent
+    tag: latest
+    pullPolicy: Always
+
+  # kathy.envVars -- Environment variables to add Nomad agent kathy pod
+  envVars: []
+
+  # kathy.resources -- Kathy container's resource requests and limits
+  # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  resources:
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+
+  # kathy.podLabels -- Add extra labels to the pods
+  podLabels: {}
+
+  # kathy.podAnnotations -- Add extra annotations to the pod
+  podAnnotations: {}
+
+
+# Watcher configuration
+#
+watcher:
+
+  # watcher.enabled -- Enable Nomad agent watcher
+  enabled: false
+
+  # watcher.envVars -- Environment variables to add Nomad agent watcher pod
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/nomad-agent
+    tag: latest
+    pullPolicy: Always
+  
+  # watcher.envVars -- Environment variables to add Nomad agent watcher pod
+  envVars: []
+
+  # watcher.resources -- Watcher container's resource requests and limits
+  # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  resources:
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+
+  # watcher.podLabels -- Add extra labels to the pods
+  podLabels: {}
+
+  # watcher.podAnnotations -- Add extra annotations to the pod
+  podAnnotations: {}

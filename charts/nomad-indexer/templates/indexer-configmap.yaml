@@ -21,6 +21,9 @@ data:
   {{- if .Values.indexer.rpcs.milkomedatestnet | quote }}
   MILKOMEDATESTNET_RPC: {{ .Values.indexer.rpcs.milkomedatestnet | quote }}
   {{- end }}
+  {{- if .Values.indexer.rpcs.milkomedatestnet | quote }}
+  EVMOSTESTNET_RPC: {{ .Values.indexer.rpcs.evmostestnet | quote }}
+  {{- end }}
   ENVIRONMENT: {{ .Values.environment | quote }}
 
   PORT: {{ .Values.indexer.internalPort | quote }}

@@ -62,18 +62,6 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-agent-0.1.2/nomad-agent-0.1.2.tgz
     version: 0.1.2
-  nomad-bridge:
-  - apiVersion: v2
-    appVersion: 0.0.1
-    created: "2022-02-11T06:42:44.025729298Z"
-    description: A Helm Chart that encapsulates the deployment of the Nomad bridge
-      agents
-    digest: 321d9e2bd10e5fcf869184d91623e6b845f20bc31c78ee4fe8fbed289cae66fa
-    name: nomad-bridge
-    type: application
-    urls:
-    - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-bridge-0.1.0/nomad-bridge-0.1.0.tgz
-    version: 0.1.0
   nomad-indexer:
   - apiVersion: v2
     appVersion: 0.0.1

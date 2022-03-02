@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "monitor.fullname" $ }}-{{ $network }}-relayer
+  name: {{ include "monitor.fullname" $ }}-{{ $network | lower }}-relayer
   labels:
     {{- include "monitor.labels" $ | nindent 4 }}
 spec:

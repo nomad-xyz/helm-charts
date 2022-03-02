@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "monitor.fullname" $ }}-{{ $network }}-bridge-health
+  name: {{ include "monitor.fullname" $ }}-{{ $network | lower }}-bridge-health
   labels:
     {{- include "monitor.labels" $ | nindent 4 }}
 spec:

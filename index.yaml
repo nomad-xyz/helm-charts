@@ -218,6 +218,16 @@ entries:
   nomad-monitor:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-03-04T23:28:09.507466706Z"
+    description: A tool that queries metrics about Ethereum accounts
+    digest: d34943f196f746f03182dbf2870665513bcdffffc8787b2d5ee3f32c96af594c
+    name: nomad-monitor
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-monitor-0.1.3/nomad-monitor-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-03-02T21:08:45.931886477Z"
     description: A tool that queries metrics about Ethereum accounts
     digest: 1d147f3902bf62d4df155c4171219d06acc8e82d4ede56e61de3667830356156
@@ -246,4 +256,4 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-monitor-0.1.0/nomad-monitor-0.1.0.tgz
     version: 0.1.0
-generated: "2022-03-02T21:08:45.932092173Z"
+generated: "2022-03-04T23:28:09.50768681Z"

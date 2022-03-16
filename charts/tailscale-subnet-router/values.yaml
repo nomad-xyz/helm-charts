@@ -1,0 +1,56 @@
+
+nameOverride: ""
+
+fullnameOverride: ""
+
+image:
+  repository: gcr.io/nomad-xyz/tailscale
+  # Overrides the image tag whose default is the chart appVersion.
+  # tag: <default to chart app version>
+  pullPolicy: Always
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  enabled: true
+  fsGroup: 1000
+
+containerSecurityContext:
+  enabled: true
+  runAsUser: 1000
+  capabilities:
+    add:
+      - NET_ADMIN
+
+config:
+  # authKey: ""
+
+  # Environment variables to add Nomad agent processor pod
+  envVars: []
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

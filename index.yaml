@@ -256,4 +256,15 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-monitor-0.1.0/nomad-monitor-0.1.0.tgz
     version: 0.1.0
-generated: "2022-03-04T23:28:09.50768681Z"
+  tailscale-subnet-router:
+  - apiVersion: v2
+    appVersion: 1.22.0
+    created: "2022-03-16T16:25:53.863691531Z"
+    description: A Helm chart for Tailscale subnet router deployment on Kubernetes
+    digest: 1fc755eaea1eae16d39e21310b50a4729c2f19c9100c21706a5e6f28dfab68a5
+    name: tailscale-subnet-router
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/tailscale-subnet-router-0.1.0/tailscale-subnet-router-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-03-16T16:25:53.864652444Z"

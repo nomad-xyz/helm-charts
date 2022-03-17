@@ -35,7 +35,7 @@ spec:
       {{- end }}
       containers:
         - name: nomad-agent
-          image: "{{ .Values.updater.image.registry }}/{{ .Values.updater.image.repository }}:{{ .Values.updater.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.updater.image.registry }}/{{ .Values.updater.image.repository }}:{{ .Values.updater.image.tag | default .Values.image.tag }}"
           imagePullPolicy: {{ .Values.updater.image.pullPolicy }}
           {{- if .Values.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.containerSecurityContext "enabled" | toYaml | nindent 12 }}
@@ -44,6 +44,12 @@ spec:
           envFrom:
             - secretRef:
                 name: {{ include "agent.fullname" . }}-awscreds
+          {{- with .Values.commonEnvFrom }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.updater.envFrom }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
           env:
           {{- with .Values.commonEnvVars }}
           {{- toYaml . | nindent 12 }}

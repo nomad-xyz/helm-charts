@@ -3,26 +3,8 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-indexer-env
 data:
-  {{- if .Values.indexer.rpcs.ethereum }}
-  ETHEREUM_RPC: {{ .Values.indexer.rpcs.ethereum | quote }}
-  {{- end }}
-  {{- if .Values.indexer.rpcs.moonbeam }}
-  MOONBEAM_RPC: {{ .Values.indexer.rpcs.moonbeam | quote }}
-  {{- end }}
-  {{- if .Values.indexer.rpcs.kovan }}
-  KOVAN_RPC: {{ .Values.indexer.rpcs.kovan | quote }}
-  {{- end }}
-  {{- if .Values.indexer.rpcs.rinkeby }}
-  RINKEBY_RPC: {{ .Values.indexer.rpcs.rinkeby | quote }}
-  {{- end }}
-  {{- if .Values.indexer.rpcs.moonbasealpha | quote }}
-  MOONBASEALPHA_RPC: {{ .Values.indexer.rpcs.moonbasealpha | quote }}
-  {{- end }}
-  {{- if .Values.indexer.rpcs.milkomedatestnet | quote }}
-  MILKOMEDATESTNET_RPC: {{ .Values.indexer.rpcs.milkomedatestnet | quote }}
-  {{- end }}
-  {{- if .Values.indexer.rpcs.milkomedatestnet | quote }}
-  EVMOSTESTNET_RPC: {{ .Values.indexer.rpcs.evmostestnet | quote }}
+  {{- range $rpc_key, $rpc_url := .Values.indexer.rpcs }}
+  {{ $rpc_key | upper }}: {{ $rpc_url | quote }}
   {{- end }}
   ENVIRONMENT: {{ .Values.environment | quote }}
 

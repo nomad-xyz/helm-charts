@@ -25,12 +25,11 @@ indexer:
     # ethereum_rpc: "https://main-light.eth.linkpool.io"
     # moonbeam_rpc: "https://rpc.api.moonbeam.network"
     # ....
-  api: 
+  api:
     replicas: 1
     ingress: 
       enabled: true
-      staticIPName: "test"
-      domains: [ "bridge-indexer.dev.madlads.tools"]
+      annotations: {}
 
 postgresql: 
   postgresqlUsername: postgres
@@ -55,8 +54,7 @@ storage:
 podSecurityContext:
   fsGroup: 2000
 
-securityContext:
-  {}
+securityContext: {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -64,8 +62,7 @@ securityContext:
   # runAsNonRoot: true
   # runAsUser: 1000
 
-resources:
-  {}
+resources: {}
   # limits:
   #   cpu: 100m
   #   memory: 128Mi

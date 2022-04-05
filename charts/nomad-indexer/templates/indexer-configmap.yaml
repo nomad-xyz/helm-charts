@@ -12,3 +12,4 @@ data:
   BATCH_SIZE: {{ .Values.indexer.rpc_batch_size | quote }}
   PROGRAM: "core"
   DATABASE_URL: postgres://{{ .Values.indexer.db.user }}:{{ .Values.indexer.db.password }}@{{ tpl .Values.indexer.db.host . }}:{{ .Values.indexer.db.port }}/{{ .Values.indexer.db.database }}?connect_timeout=300&schema=public
+  REDIS_URL: {{ .Values.indxer.redis.url | quote }}

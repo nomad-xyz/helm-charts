@@ -19,6 +19,8 @@ indexer:
     password: postgres
     database: nomad-indexer
     port: 5432
+  redis: 
+    url: redis://redis:6379
   internalPort: 3000
   rpc_batch_size: 2000
   rpcs: {}

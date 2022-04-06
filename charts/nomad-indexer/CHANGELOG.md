@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.0.6 
+
+- Added RPC environment variables to API configmap
+
 ## 0.0.5
 
 - Bugfix in indexer configmap

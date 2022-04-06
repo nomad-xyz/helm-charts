@@ -3,6 +3,9 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-indexer-api-env
 data:
+  {{- range $rpc_key, $rpc_url := .Values.indexer.rpcs }}
+  {{ $rpc_key | upper }}: {{ $rpc_url | quote }}
+  {{- end }}
   ENVIRONMENT: {{ .Values.environment | quote }}
 
   PORT: {{ .Values.indexer.internalPort | quote }}

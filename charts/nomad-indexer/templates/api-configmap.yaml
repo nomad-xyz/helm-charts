@@ -7,7 +7,9 @@ data:
   {{ $rpc_key | upper }}: {{ $rpc_url | quote }}
   {{- end }}
   ENVIRONMENT: {{ .Values.environment | quote }}
-
   PORT: {{ .Values.indexer.internalPort | quote }}
   PROGRAM: "api"
   DATABASE_URL: postgres://{{ .Values.indexer.db.user }}:{{ .Values.indexer.db.password }}@{{ tpl .Values.indexer.db.host . }}:{{ .Values.indexer.db.port }}/{{ .Values.indexer.db.database }}?connect_timeout=300&schema=public
+  {{- if .Values.indexer.overrideConfigUrl }}
+  CONFIG_OVERRIDE_LOCATION: {{ .Values.indexer.overrideConfigUrl | quote }}
+  {{- end }}

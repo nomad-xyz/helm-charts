@@ -19,6 +19,7 @@ indexer:
     password: postgres
     database: nomad-indexer
     port: 5432
+  loglevel: info
   redis: 
     url: redis://redis:6379
   overrideConfigUrl: ""

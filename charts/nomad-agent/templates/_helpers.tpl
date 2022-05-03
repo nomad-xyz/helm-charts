@@ -35,7 +35,7 @@ Common labels
 */}}
 {{- define "nomad-agent.labels" -}}
 helm.sh/chart: {{ include "nomad-agent.chart" . }}
-nomad/deployment: {{ .Values.nomad.runEnv | quote }}
+environment: {{ .Values.nomad.runEnv | quote }}
 {{ include "nomad-agent.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}

@@ -3,6 +3,16 @@ entries:
   keymaster:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-05-10T16:08:20.30578204Z"
+    description: A tool that queries metrics about Ethereum accounts
+    digest: 048dbfe403338b0e2c7301de5da4b146b8b75c62c0d534d497f8cb6a10a2847e
+    name: keymaster
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/keymaster-0.1.1/keymaster-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-01-06T17:06:54.381175376Z"
     description: A tool that queries metrics about Ethereum accounts
     digest: 161fe6bd9db5ffbc1cf1e2976ebabbc59272802a0e0ce4133dc809ea51a28adf
@@ -390,4 +400,4 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/tailscale-subnet-router-0.1.0/tailscale-subnet-router-0.1.0.tgz
     version: 0.1.0
-generated: "2022-05-03T19:53:30.175273034Z"
+generated: "2022-05-10T16:08:20.305916038Z"

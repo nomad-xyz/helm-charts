@@ -389,6 +389,17 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-monitor-0.1.0/nomad-monitor-0.1.0.tgz
     version: 0.1.0
+  nomad-service-agreement-api:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-05-18T19:33:56.526428403Z"
+    description: A service-agreement api service
+    digest: 427fb7be9d64640c996984c3ca6ebf804da1f9193e7ea1b824b41691fc1c8b4b
+    name: nomad-service-agreement-api
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-service-agreement-api-0.0.1/nomad-service-agreement-api-0.0.1.tgz
+    version: 0.0.1
   tailscale-subnet-router:
   - apiVersion: v2
     appVersion: 1.22.0
@@ -400,4 +411,4 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/tailscale-subnet-router-0.1.0/tailscale-subnet-router-0.1.0.tgz
     version: 0.1.0
-generated: "2022-05-10T16:08:20.305916038Z"
+generated: "2022-05-18T19:33:56.526885Z"

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "service.fullname" . }}
+spec:
+  replicas: {{ .Values.serviceAgreementApi.replicas }}
+  selector:
+    matchLabels:
+      environment: {{ .Values.serviceAgreementApi.environment }}
+      app.kubernetes.io/component: service-agreement-api
+  template:
+    metadata:
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/api-configmap.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        environment: {{ .Values.serviceAgreementApi.environment }}
+        app.kubernetes.io/component: service-agreement-api
+    spec:
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: service-agreement-api
+        image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["yarn", "start" ]
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        envFrom:
+        - configMapRef:
+            name: {{ include "service.fullname" . }}-cfm
+        - secretRef:
+            name: {{ include "service.fullname" . }}-secrets
+        ports:
+        - name: service-port
+          containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 3000
+          periodSeconds: 5
+          initialDelaySeconds: 5

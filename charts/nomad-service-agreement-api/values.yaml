@@ -1,0 +1,47 @@
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  registry: gcr.io
+  repository: nomad-xyz/nomad-service-agreement-api
+  tag: latest
+  pullPolicy: Always
+
+serviceAgreementApi:
+  replicas: 2
+  environment: development
+  servicePort: 3000
+  databaseUrl: ""
+  ingress:
+    enabled: true
+    annotations: {}
+
+podAnnotations: {}
+
+podCommonLabels: {}
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "service.fullname" . }}-cfm
+data:
+  SERVER_PORT: {{ .Values.serviceAgreementApi.servicePort | quote }}

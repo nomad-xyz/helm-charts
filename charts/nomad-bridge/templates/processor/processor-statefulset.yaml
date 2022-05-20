@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels: {{- include "agent.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: processor
-  replicas: 1
+  replicas: {{ .Values.processor.replicas }}
   serviceName: {{ include "agent.fullname" . }}-processor-svc
   template:
     metadata:

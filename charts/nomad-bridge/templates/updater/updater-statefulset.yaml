@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels: {{- include "agent.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: updater
-  replicas: 1
+  replicas: {{ .Values.updater.replicas }}
   serviceName: {{ include "agent.fullname" . }}-updater-svc
   template:
     metadata:

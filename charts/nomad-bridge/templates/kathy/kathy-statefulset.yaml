@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels: {{- include "agent.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: kathy
-  replicas: 1
+  replicas: {{ .Values.kathy.replicas }}
   serviceName: {{ include "agent.fullname" . }}-kathy-svc
   template:
     metadata:

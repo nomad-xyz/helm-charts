@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels: {{- include "agent.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: relayer
-  replicas: 1
+  replicas: {{ .Values.relayer.replicas }}
   serviceName: {{ include "agent.fullname" . }}-relayer-svc
   template:
     metadata:

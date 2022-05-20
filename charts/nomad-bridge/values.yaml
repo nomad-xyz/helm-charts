@@ -77,6 +77,9 @@ processor:
   # processor.enabled -- Enable Nomad agent processor
   enabled: true
 
+  # processor.replicas -- Number of instances of processor
+  replicas: 1
+
   image:
     registry: gcr.io
     repository: nomad-xyz/nomad-agent
@@ -112,6 +115,9 @@ relayer:
 
   # relayer.enabled -- Enable Nomad agent relayer
   enabled: true
+
+  # relayer.replicas -- Number of instances of relayer
+  replicas: 1
 
   # relayer.image -- Nomad agent relayer docker image configuration (immutable image tags are recommended)
   image:
@@ -150,6 +156,9 @@ updater:
   # updater.enabled -- Enable Nomad agent updater
   enabled: true
 
+  # updater.replicas -- Number of instances of updater (Warning: you should always have only one instance of updater running at any given time)
+  replicas: 1
+
    # updater.image -- Nomad agent updater docker image configuration (immutable image tags are recommended)
   image:
     registry: gcr.io
@@ -187,6 +196,9 @@ kathy:
   # kathy.enabled -- Enable Nomad agent kathy
   enabled: false
 
+  # kathy.replicas -- Number of instances of kathy
+  replicas: 1
+
   # kathy.image -- Nomad agent kathy docker image configuration (immutable image tags are recommended)
   image:
     registry: gcr.io
@@ -223,6 +235,9 @@ watcher:
 
   # watcher.enabled -- Enable Nomad agent watcher
   enabled: false
+
+  # watcher.replicas -- Number of instances of watcher
+  replicas: 1
 
   # watcher.envVars -- Environment variables to add Nomad agent watcher pod
   image:

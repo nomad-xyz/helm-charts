@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels: {{- include "agent.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: watcher
-  replicas: 1
+  replicas: {{ .Values.watcher.replicas }}
   serviceName: {{ include "agent.fullname" . }}-watcher-svc
   template:
     metadata:

@@ -35,8 +35,10 @@ spec:
             name: {{.Release.Name }}-indexer-api-env
         ports: 
         - name: api
-          containerPort: 3000
+          containerPort: {{ .Values.indexer.internalPort }}
+        - name: metrics
+          containerPort: {{ .Value.indexer.metricsPort }}
         readinessProbe:
           httpGet:
             path: /healthcheck
-            port: 3000
+            port: {{ .Values.indexer.internalPort }}

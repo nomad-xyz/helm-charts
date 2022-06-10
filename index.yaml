@@ -75,6 +75,17 @@ entries:
   nomad-bridge:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2022-06-10T20:50:19.343849772Z"
+    description: A Helm Chart that encapsulates the deployment of the Nomad bridge
+      agents
+    digest: e860435c7d7d981b2279fe0bc876efb58869205bc8f790439a8aca1ff2bb70d5
+    name: nomad-bridge
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-bridge-0.1.3/nomad-bridge-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2022-05-20T01:06:18.311279341Z"
     description: A Helm Chart that encapsulates the deployment of the Nomad bridge
       agents
@@ -436,4 +447,4 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/tailscale-subnet-router-0.1.0/tailscale-subnet-router-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-03T19:44:11.173531931Z"
+generated: "2022-06-10T20:50:19.344066575Z"

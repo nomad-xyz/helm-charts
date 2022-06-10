@@ -55,6 +55,8 @@ Create the name of the service account to use
 */}}
 {{- define "agent.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-serviceAccountName:  {{- default (include "agent.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "agent.fullname" .) .Values.serviceAccount.name }}
+{{- else }}
+{{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}

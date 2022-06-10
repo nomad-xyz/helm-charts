@@ -2,5 +2,5 @@ apiVersion: v2
 name: nomad-bridge
 description: A Helm Chart that encapsulates the deployment of the Nomad bridge agents
 type: application
-version: 0.1.2
+version: 0.1.3
 appVersion: 0.0.1

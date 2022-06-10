@@ -66,6 +66,9 @@ spec:
           ports: 
             - name: metrics
               containerPort: {{ .Values.metrics.port }}
+      {{- if .Values.serviceAccount.create }}
+      serviceAccountName: {{ include "agent.serviceAccountName" . }}
+      {{- end }}
       {{- with .Values.relayer.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

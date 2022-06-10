@@ -12,7 +12,7 @@ fullnameOverride: ""
 serviceAccount:
   # serviceAccount.create -- Create service account
   create: true
-  # serviceAccount.name -- Name of service account to use if create is false
+  # serviceAccount.name -- Name of service account to use if create is true
   name: ""
 
 # -- Configure Pods Security Context

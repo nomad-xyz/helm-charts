@@ -51,7 +51,7 @@ A Helm Chart that encapsulates the deployment of the Nomad bridge agents
 | relayer.resources | object | `{"limits":{"cpu":"50m","memory":"50Mi"},"requests":{"cpu":"10m","memory":"20Mi"}}` | Relayer container's resource requests and limits ref: https://kubernetes.io/docs/user-guide/compute-resources/ |
 | serviceAccount | object | `{"create":true,"name":""}` | ServiceAccount configuration  |
 | serviceAccount.create | bool | `true` | Create service account |
-| serviceAccount.name | string | `""` | Name of service account to use if create is false |
+| serviceAccount.name | string | `""` | Name of service account to use if create is true |
 | storage | object | `{"accessModes":"ReadWriteOnce","capacity":"10Gi","mountPath":"/usr/share/nomad","storageClass":"standard"}` | Persistent Storage pod configuration  |
 | storage.accessModes | string | `"ReadWriteOnce"` | AccessModes for Persistent Volume(s) |
 | storage.capacity | string | `"10Gi"` | Mount path for Nomad DB Persistent Volume(s)  |

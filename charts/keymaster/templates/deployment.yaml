@@ -2,40 +2,59 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "keymaster.fullname" . }}
-  labels:
-    {{- include "keymaster.labels" . | nindent 4 }}
+  labels: {{- include "keymaster.labels" . | nindent 4 }}
+    app.kubernetes.io/component: keymaster
 spec:
-  replicas: 1
   selector:
-    matchLabels:
-      {{- include "keymaster.selectorLabels" . | nindent 6 }}
+    matchLabels: {{- include "keymaster.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: keymaster
+  replicas: 1
+  serviceName: {{ include "keymaster.fullname" . }}-keymaster-svc
   template:
     metadata:
       annotations:
         checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
-      {{- with .Values.podAnnotations }}
+        {{- with .Values.keymaster.podAnnotations }}
         {{- toYaml . | nindent 8 }}
-      {{- end }}
-      labels:
-        {{- include "keymaster.selectorLabels" . | nindent 8 }}
+        {{- end }}
+      labels: {{- include "keymaster.labels" . | nindent 8 }}
+        app.kubernetes.io/component: keymaster
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
+      {{- if .Values.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: nomad-keymaster
+          image: "{{ .Values.keymaster.image.repository }}:{{ .Values.keymaster.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.keymaster.image.pullPolicy }}
+          {{- if .Values.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
+          {{- if .Values.keymaster.resources }}
+          resources: {{- toYaml .Values.keymaster.resources | nindent 12 }}
+          {{- end }}
+          volumeMounts: 
+            - name: keymaster-config
+              mountPath: /code/config
+          ports:
+            - name: metrics
+              containerPort: {{ .Values.metrics.port }}
+      {{- if .Values.serviceAccount.create }}
+      serviceAccountName: {{ include "keymaster.serviceAccountName" . }}
+      {{- end }}
+      {{- with .Values.keymaster.nodeSelector }}
+      nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      volumes: 
-      - name: keymaster-config
-        configMap:
-          name: {{.Release.Name}}-config
-      containers:
-      - name: {{ .Chart.Name }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        resources:
-          {{- toYaml .Values.resources | nindent 12 }}
-        ports: 
-        - name: metrics
-          containerPort: 9090
-        volumeMounts: 
+      {{- with .Values.keymaster.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.keymaster.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
         - name: keymaster-config
-          mountPath: /code/config
+          configMap:
+            name: {{ include "keymaster.fullname" . }}-config

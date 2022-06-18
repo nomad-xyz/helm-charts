@@ -9,7 +9,6 @@ spec:
     matchLabels: {{- include "keymaster.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: keymaster
   replicas: 1
-  serviceName: {{ include "keymaster.fullname" . }}-keymaster-svc
   template:
     metadata:
       annotations:
@@ -25,17 +24,26 @@ spec:
       {{- end }}
       containers:
         - name: nomad-keymaster
-          image: "{{ .Values.keymaster.image.repository }}:{{ .Values.keymaster.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.keymaster.image.registry }}/{{ .Values.keymaster.image.repository }}:{{ .Values.keymaster.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.keymaster.image.pullPolicy }}
           {{- if .Values.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
+          {{- with .Values.keymaster.envFrom }}
+          envFrom:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.keymaster.envVars }}
+          env:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- if .Values.keymaster.resources }}
           resources: {{- toYaml .Values.keymaster.resources | nindent 12 }}
           {{- end }}
-          volumeMounts: 
+          volumeMounts:
             - name: keymaster-config
-              mountPath: /code/config
+              mountPath: /config
+              readOnly: true
           ports:
             - name: metrics
               containerPort: {{ .Values.metrics.port }}

@@ -50,6 +50,12 @@ keymaster:
 
   config: '{}' # Contents of JSON Config File
 
+  # keymaster.envFrom -- Environment variables from a config/secret file
+  envFrom: []
+
+  # keymaster.envVars -- Environment variables to add Nomad agent processor pod
+  envVars: []
+
   # keymaster.resources -- keymaster container's resource requests and limits
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources: {}

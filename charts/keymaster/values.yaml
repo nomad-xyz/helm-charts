@@ -1,31 +1,75 @@
-replicaCount: 1
 
-image:
-  repository: gcr.io/nomad-xyz/keymaster
-  pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
-
-keymaster:
-  config: # Contents of JSON Config File
-
-imagePullSecrets: []
+# nameOverride -- String to partially override keymaster.fullname template with a string (will prepend the release name)
+#
 nameOverride: ""
+
+# fullnameOverride -- String to fully override keymaster.fullname template with a string
+#
 fullnameOverride: ""
 
-podAnnotations:
-  prometheus.io/scrape: "true"
-  prometheus.io/port: "9090"
+# serviceAccount -- ServiceAccount configuration
+#
+serviceAccount:
+  # serviceAccount.create -- Create service account
+  create: true
+  # serviceAccount.name -- Name of service account to use if create is true
+  name: ""
 
-resources:
-  {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+# -- Configure Pods Security Context
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+#
+podSecurityContext:
+  # podSecurityContext.enabled -- Enable pod security context
+  enabled: true
+  # podSecurityContext.fsGroup -- fsGroup ID for the pod
+  fsGroup: 1001
+
+# -- Configure Container Security Context (only main container)
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
+#
+containerSecurityContext:
+  # containerSecurityContext.enabled -- Enable container security context
+  enabled: true
+  # containerSecurityContext.runAsUser -- User ID for the container  
+  runAsUser: 1001
+
+# metrics -- Container port exposing keymaster metrics
+#
+metrics:
+  port: '9090'
+
+# Keymaster configuration
+#
+keymaster:
+
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/keymaster
+    # tag: latest
+    pullPolicy: Always
+
+  config: '{}' # Contents of JSON Config File
+
+  # keymaster.envFrom -- Environment variables from a config/secret file
+  envFrom: []
+
+  # keymaster.envVars -- Environment variables to add Nomad agent processor pod
+  envVars: []
+
+  # keymaster.resources -- keymaster container's resource requests and limits
+  # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  resources: {}
+    # limits:
+    #   cpu: 50m
+    #   memory: 50Mi
+    # requests:
+    #   cpu: 10m
+    #   memory: 20Mi
+
+  # keymaster.podLabels -- Add extra labels to the pods
+  podLabels: {}
+
+  # keymaster.podAnnotations -- Add extra annotations to the pod
+  podAnnotations: 
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '9090'

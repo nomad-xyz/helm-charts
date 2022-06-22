@@ -3,6 +3,16 @@ entries:
   keymaster:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2022-06-22T17:15:23.120281846Z"
+    description: Tool to top up wallet accounts with funds
+    digest: 23116045bf0dfa016d3316ef787fa02040507f98d750e3a6675105fe6687e2ed
+    name: keymaster
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/keymaster-0.2.1/keymaster-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2022-06-20T16:35:30.593378115Z"
     description: Tool to top up wallet accounts with funds
     digest: 8bb0b0ca82893ccac8a78942ab2fc1e18a20d2cca76296db5e25a1e489ca547e
@@ -457,4 +467,4 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/tailscale-subnet-router-0.1.0/tailscale-subnet-router-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-20T16:35:30.593487316Z"
+generated: "2022-06-22T17:15:23.120387446Z"

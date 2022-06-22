@@ -18,6 +18,9 @@ spec:
         {{- end }}
       labels: {{- include "keymaster.labels" . | nindent 8 }}
         app.kubernetes.io/component: keymaster
+        {{- with .Values.keymaster.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
     spec:
       {{- if .Values.podSecurityContext.enabled }}
       securityContext: {{- omit .Values.podSecurityContext "enabled" | toYaml | nindent 8 }}

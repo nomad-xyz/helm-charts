@@ -8,38 +8,41 @@ serviceAccount:
   name: ""
 
 environment: development
-indexer: 
+indexer:
   image:
     repository: gcr.io/nomad-xyz/nomad-indexer
     pullPolicy: Always
     tag: "sha-2354e1d8"
-  db: 
-    host:  "{{ .Release.Name }}-postgresql"
+  db:
+    host: "{{ .Release.Name }}-postgresql"
     user: postgres
     password: postgres
     database: nomad-indexer
     port: 5432
   loglevel: info
-  redis: 
+  redis:
     url: redis://redis:6379
   overrideConfigUrl: ""
   internalPort: 3000
   metricsPort: 9090
   rpc_batch_size: 2000
-  rpcs: {}
+  rpcs:
+    {}
     # ethereum_rpc: "https://main-light.eth.linkpool.io"
     # moonbeam_rpc: "https://rpc.api.moonbeam.network"
     # ....
   api:
-    replicas: 1
-    ingress: 
-      enabled: true
-      annotations: {}
 
-postgresql: 
-  postgresqlUsername: postgres
-  postgresqlPassword: postgres 
-  postgresqlDatabase: nomad-indexer
+postgresql:
+  postgresql:
+    username: postgres
+    password: postgres
+    database: nomad-indexer
+    # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+    primary:
+      resources:
+        requests:
+          cpu: 2000m
 
 podAnnotations:
   prometheus.io/scrape: "true"
@@ -58,7 +61,8 @@ storage:
 podSecurityContext:
   fsGroup: 2000
 
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -66,13 +70,29 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+statefulset:
+  # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  resources:
+    # limits:
+    #   cpu:
+    #   memory:
+    requests:
+      cpu: 500m
+      memory: 900Mi
+
+api:
+  replicas: 1
+  ingress:
+    enabled: true
+    annotations: {}
+  # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  resources:
+    # limits:
+    #   cpu:
+    #   memory:
+    requests:
+      cpu: 200m
+      memory: 700Mi
 
 nodeSelector: {}
 

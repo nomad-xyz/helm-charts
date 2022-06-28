@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-indexer-api
 spec:
-  replicas: {{ .Values.indexer.api.replicas }}
+  replicas: {{ .Values.api.replicas }}
   selector:
     matchLabels:
       environment: {{ .Values.environment }}
@@ -29,7 +29,7 @@ spec:
         imagePullPolicy: {{ $.Values.indexer.image.pullPolicy }}
         command: ["npm", "run", "start", "indexer"]
         resources:
-          {{- toYaml $.Values.resources | nindent 12 }}
+          {{- toYaml $.Values.api.resources | nindent 12 }}
         envFrom:
         - configMapRef:
             name: {{.Release.Name }}-indexer-api-env

@@ -7,7 +7,7 @@ spec:
   ports:
   - protocol: TCP
     port: 8000
-    targetPort: {{ .Values.indexer.internalPort }}
+    targetPort: {{ .Values.api.internalPort }}
   selector:
     environment: {{ .Values.environment }}
     app.kubernetes.io/component: indexer-api

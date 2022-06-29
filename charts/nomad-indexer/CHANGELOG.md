@@ -5,7 +5,7 @@
 ## 0.0.12
 
 - Renamed value statefulset -> core
-- Removed unnecessary metricsPort value
+- Cleaned up indexer values and moved into core / api sections if needed
 
 ## 0.0.11
 

@@ -23,14 +23,11 @@ indexer:
   redis:
     url: redis://redis:6379
   overrideConfigUrl: ""
-  internalPort: 3000
-  rpc_batch_size: 2000
   rpcs:
     {}
     # ethereum_rpc: "https://main-light.eth.linkpool.io"
     # moonbeam_rpc: "https://rpc.api.moonbeam.network"
     # ....
-  api:
 
 postgresql:
   # ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml#L437-L441
@@ -71,6 +68,7 @@ securityContext:
   # runAsUser: 1000
 
 core:
+  rpcBatchSize: 3000
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
     # limits:
@@ -81,6 +79,7 @@ core:
       memory: 900Mi
 
 api:
+  internalPort: 3000
   replicas: 1
   ingress:
     enabled: true

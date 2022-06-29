@@ -28,6 +28,30 @@ indexer:
     # ethereum_rpc: "https://main-light.eth.linkpool.io"
     # moonbeam_rpc: "https://rpc.api.moonbeam.network"
     # ....
+  core:
+    rpcBatchSize: 3000
+    # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+    resources:
+      # limits:
+      #   cpu:
+      #   memory:
+      requests:
+        cpu: 500m
+        memory: 900Mi
+  api:
+    internalPort: 3000
+    replicas: 1
+    ingress:
+      enabled: true
+      annotations: {}
+    # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+    resources:
+      # limits:
+      #   cpu:
+      #   memory:
+      requests:
+        cpu: 200m
+        memory: 700Mi
 
 postgresql:
   # ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml#L437-L441
@@ -66,32 +90,6 @@ securityContext:
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
-
-core:
-  rpcBatchSize: 3000
-  # ref: https://kubernetes.io/docs/user-guide/compute-resources/
-  resources:
-    # limits:
-    #   cpu:
-    #   memory:
-    requests:
-      cpu: 500m
-      memory: 900Mi
-
-api:
-  internalPort: 3000
-  replicas: 1
-  ingress:
-    enabled: true
-    annotations: {}
-  # ref: https://kubernetes.io/docs/user-guide/compute-resources/
-  resources:
-    # limits:
-    #   cpu:
-    #   memory:
-    requests:
-      cpu: 200m
-      memory: 700Mi
 
 nodeSelector: {}
 

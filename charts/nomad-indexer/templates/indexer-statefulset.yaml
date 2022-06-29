@@ -59,6 +59,6 @@ spec:
           apiGroup: snapshot.storage.k8s.io
         {{- end }}
         resources:
-          {{- toYaml .Values.core.resources | nindent 10}}
+          {{- toYaml .Values.indexer.core.resources | nindent 10}}
           requests:
             storage: {{ .Values.storage.size }}

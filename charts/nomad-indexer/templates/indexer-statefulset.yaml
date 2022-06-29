@@ -43,9 +43,6 @@ spec:
         envFrom:
         - configMapRef:
             name: {{.Release.Name }}-indexer-env
-        ports: 
-        - name: metrics
-          containerPort: {{ .Values.indexer.metricsPort }}
         volumeMounts:
           - name: state
             mountPath: /tmp

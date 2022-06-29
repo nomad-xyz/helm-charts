@@ -5,6 +5,7 @@
 ## 0.0.12
 
 - Renamed value statefulset -> core
+- Removed unnecessary metricsPort value
 
 ## 0.0.11
 

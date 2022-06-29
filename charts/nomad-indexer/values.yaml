@@ -24,7 +24,6 @@ indexer:
     url: redis://redis:6379
   overrideConfigUrl: ""
   internalPort: 3000
-  metricsPort: 9090
   rpc_batch_size: 2000
   rpcs:
     {}

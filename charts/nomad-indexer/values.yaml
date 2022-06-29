@@ -71,7 +71,7 @@ securityContext:
   # runAsNonRoot: true
   # runAsUser: 1000
 
-statefulset:
+core:
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
     # limits:

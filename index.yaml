@@ -140,6 +140,20 @@ entries:
   nomad-indexer:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2022-06-30T18:54:45.733173879Z"
+    dependencies:
+    - name: postgresql
+      repository: file://charts/postgresql
+      version: 8.6.4
+    description: A tool that indexes Nomad Events from one or more blockchains
+    digest: 546c648cc01651b7e9840db38dd7c9a64362fc788d0208d618426b29b95879da
+    name: nomad-indexer
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-indexer-0.0.13/nomad-indexer-0.0.13.tgz
+    version: 0.0.13
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2022-06-30T17:25:00.922469641Z"
     dependencies:
     - name: postgresql
@@ -495,4 +509,4 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/tailscale-subnet-router-0.1.0/tailscale-subnet-router-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-30T17:25:00.922699144Z"
+generated: "2022-06-30T18:54:45.733347678Z"

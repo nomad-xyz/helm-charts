@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.0.13
+
+- Added prometheus pod annotations for API 
+- Added back indexer metrics port for prometheus 
+
 ## 0.0.12
 
 - Renamed value statefulset -> core

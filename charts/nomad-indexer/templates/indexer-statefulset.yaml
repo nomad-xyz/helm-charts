@@ -40,6 +40,11 @@ spec:
         image: "{{ .Values.indexer.image.repository }}:{{ .Values.indexer.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.indexer.image.pullPolicy }}
         command: ["npm", "run", "start", "indexer"]
+        resources:
+          {{- toYaml $.Values.indexer.core.resources | nindent 12 }}
+        ports: 
+        - name: metrics
+          containerPort: {{ .Values.indexer.metricsPort }}
         envFrom:
         - configMapRef:
             name: {{.Release.Name }}-indexer-env

@@ -23,6 +23,7 @@ indexer:
   redis:
     url: redis://redis:6379
   overrideConfigUrl: ""
+  metricsPort: 3000
   rpcs:
     {}
     # ethereum_rpc: "https://main-light.eth.linkpool.io"

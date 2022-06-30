@@ -43,9 +43,6 @@ spec:
         envFrom:
         - configMapRef:
             name: {{.Release.Name }}-indexer-env
-        ports: 
-        - name: metrics
-          containerPort: {{ .Values.indexer.metricsPort }}
         volumeMounts:
           - name: state
             mountPath: /tmp
@@ -62,6 +59,6 @@ spec:
           apiGroup: snapshot.storage.k8s.io
         {{- end }}
         resources:
-          {{- toYaml .Values.statefulset.resources | nindent 10}}
+          {{- toYaml .Values.indexer.core.resources | nindent 10}}
           requests:
             storage: {{ .Values.storage.size }}

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-indexer-api
 spec:
-  replicas: {{ .Values.api.replicas }}
+  replicas: {{ .Values.indexer.api.replicas }}
   selector:
     matchLabels:
       environment: {{ .Values.environment }}
@@ -29,16 +29,14 @@ spec:
         imagePullPolicy: {{ $.Values.indexer.image.pullPolicy }}
         command: ["npm", "run", "start", "indexer"]
         resources:
-          {{- toYaml $.Values.api.resources | nindent 12 }}
+          {{- toYaml $.Values.indexer.api.resources | nindent 12 }}
         envFrom:
         - configMapRef:
             name: {{.Release.Name }}-indexer-api-env
         ports: 
         - name: api
-          containerPort: {{ .Values.indexer.internalPort }}
-        - name: metrics
-          containerPort: {{ .Values.indexer.metricsPort }}
+          containerPort: {{ .Values.indexer.api.internalPort }}
         readinessProbe:
           httpGet:
             path: /healthcheck
-            port: {{ .Values.indexer.internalPort }}
+            port: {{ .Values.indexer.api.internalPort }}

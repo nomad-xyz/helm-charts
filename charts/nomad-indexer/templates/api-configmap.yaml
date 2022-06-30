@@ -7,8 +7,8 @@ data:
   {{ $rpc_key | upper }}: {{ $rpc_url | quote }}
   {{- end }}
   ENVIRONMENT: {{ .Values.environment | quote }}
-  PORT: {{ .Values.indexer.internalPort | quote }}
-  METRICS_PORT: {{ .Values.indexer.metricsPort | quote }}
+  PORT: {{ .Values.indexer.api.internalPort | quote }}
+  LOG_LEVEL: {{ .Values.indexer.loglevel | quote }}
   PROGRAM: "api"
   DATABASE_URL: postgres://{{ .Values.indexer.db.user }}:{{ .Values.indexer.db.password }}@{{ tpl .Values.indexer.db.host . }}:{{ .Values.indexer.db.port }}/{{ .Values.indexer.db.database }}?connect_timeout=300&schema=public
   {{- if .Values.indexer.overrideConfigUrl }}

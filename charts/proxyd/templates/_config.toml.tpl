@@ -1,9 +1,9 @@
 {{- define "config.toml" -}}
 # List of WS methods to whitelist.
 ws_method_whitelist = [
-"eth_subscribe",
-"eth_call",
-"eth_chainId"
+{{- range .Values.config.rpc_whitelist }}
+{{ . | quote }},
+{{- end }}
 ]
 # Enable WS on this backend group. There can only be one WS-enabled backend group.
 ws_backend_group = "main"

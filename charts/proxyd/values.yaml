@@ -31,7 +31,7 @@ proxyd:
     rpc_port: 8545
     ws_port: 8546
   redis: 
-    url: "redis://nomad-development-redis-master:6379"
+    url: ""
   metrics:
     port: 9090
   backend: 
@@ -40,8 +40,8 @@ proxyd:
     out_of_service_seconds: 600
   backends: 
     alchemy: 
-      rpc_url: https://eth-rinkeby.alchemyapi.io/v2/-uKtZgu7bWLDEuW3EaOZ0f6eKpqiH-Tj
-      ws_url: wss://eth-rinkeby.alchemyapi.io/v2/-uKtZgu7bWLDEuW3EaOZ0f6eKpqiH-Tj
+      rpc_url: ""
+      ws_url: ""
       username: ""
       password: ""
       max_rps: 3
@@ -85,9 +85,7 @@ service:
 
 ingress:
   enabled: false
-  annotations: 
-    external-dns.alpha.kubernetes.io/hostname: rinkeby.rpc.dev.madlads.tools
-  tls: []
+  annotations: {}
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

@@ -53,6 +53,11 @@ indexer:
       requests:
         cpu: 200m
         memory: 700Mi
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 10
+      targetCPUUtilizationPercentage: 80
 
 postgresql:
   # ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml#L437-L441

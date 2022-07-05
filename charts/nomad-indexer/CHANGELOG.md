@@ -2,10 +2,12 @@
 
 ## Unreleased
 
+- Support horizontally scaling the indexer api based on cpu utilization
+
 ## 0.0.13
 
-- Added prometheus pod annotations for API 
-- Added back indexer metrics port for prometheus 
+- Added prometheus pod annotations for API
+- Added back indexer metrics port for prometheus
 
 ## 0.0.12
 

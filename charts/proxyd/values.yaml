@@ -1,0 +1,120 @@
+# Default values for proxyd.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+environment: development
+network: rinkeby
+
+replicaCount: 1
+
+image:
+  repository: gcr.io/nomad-xyz/proxyd
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+proxyd: 
+  config: 
+    path: /etc/proxyd/
+    rpc_whitelist: 
+      - eth_getBalance
+      - eth_call
+      - eth_chainId
+      - eth_blockNumber
+      - eth_getBlockByHash
+      - eth_sendTransaction
+    # An array of aliases mapped to auth token values
+    authentication: 
+      enabled: true
+      tokens: 
+        - name: "service_name" 
+          token: "token"
+
+  server: 
+    rpc_port: 8545
+    ws_port: 8546
+  redis: 
+    url: ""
+  metrics:
+    port: 9090
+  backend: 
+    response_timeout_seconds: 5
+    max_retries: 3
+    out_of_service_seconds: 600
+  backends: {}
+    # alchemy: 
+    #   rpc_url: ""
+    #   ws_url: ""
+    #   username: ""
+    #   password: ""
+    #   max_rps: 3
+    #   max_ws_conns: 1
+    # infura: 
+    #   rpc_url: ""
+    #   ws_url: ""
+    #   username: ""
+    #   password: ""
+    #   max_rps: 3
+    #   max_ws_conns: 1
+
+
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations:
+  prometheus.io/scrape: 'true'
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: NodePort
+  port: 8545
+
+ingress:
+  enabled: false
+  annotations: {}
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

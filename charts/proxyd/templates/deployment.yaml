@@ -37,20 +37,22 @@ spec:
             - name: http
               containerPort: {{ .Values.proxyd.server.rpc_port }}
               protocol: TCP
-            - name: wss
-              containerPort: {{ .Values.proxyd.server.ws_port }}
-              protocol: TCP
+            # - name: wss
+            #   containerPort: {{ .Values.proxyd.server.ws_port }}
+            #   protocol: TCP
             - name: metrics
               containerPort: {{ .Values.proxyd.metrics.port }}
               protocol: TCP
           livenessProbe:
-            tcpSocket:
-               port: 8545
+            httpGet:
+              path: /healthz
+              port: 8545
             initialDelaySeconds: 5
             periodSeconds:       10
           readinessProbe:
-            tcpSocket:
-               port: 8545
+            httpGet:
+              path: /healthz
+              port: 8545
             initialDelaySeconds: 5
             periodSeconds:       10
           resources:

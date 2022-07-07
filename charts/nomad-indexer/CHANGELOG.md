@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.0.14
+
 - Support horizontally scaling the indexer api based on cpu utilization
 
 ## 0.0.13

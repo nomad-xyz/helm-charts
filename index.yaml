@@ -501,6 +501,16 @@ entries:
   proxyd:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-07-08T15:34:20.614571235Z"
+    description: A horizontally-scalable RPC Proxy for Ethereum-compatible Blockchains
+    digest: 663d564bbae8065207340f29193f3a24f2d4e63f8f4d1ba81ef95955ae7442d1
+    name: proxyd
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/proxyd-0.0.2/proxyd-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-07-05T23:55:27.671882242Z"
     description: A horizontally-scalable RPC Proxy for Ethereum-compatible Blockchains
     digest: cb3e4e8e7740f47f0befa9a5ce2874baa2a0ca914944ed9fbab66712323fe1ab
@@ -520,4 +530,4 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/tailscale-subnet-router-0.1.0/tailscale-subnet-router-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-05T23:55:27.672005443Z"
+generated: "2022-07-08T15:34:20.614706437Z"

@@ -33,12 +33,14 @@ proxyd:
       tokens: 
         - name: "service_name" 
           token: "token"
-
+    cache: 
+      enabled: false
+      redis: 
+        url: ""
   server: 
     rpc_port: 8545
     ws_port: 8546
-  redis: 
-    url: ""
+  
   metrics:
     port: 9090
   backend: 

@@ -21,9 +21,18 @@ ws_port = {{ .Values.proxyd.server.ws_port }}
 max_body_size_bytes = 10485760
 max_concurrent_rpcs = 1000
 
+{{ if .Values.proxyd.config.cache.enabled }}
+[cache]
+enabled = true
+{{- $keys := keys $.Values.proxyd.backends }}
+{{- $backendKey := index $keys 0  }}
+{{- $backend := get $.Values.proxyd.backends $backendKey }}
+block_sync_rpc_url = {{ $backend.rpc_url | quote }}
+
 [redis]
 # URL to a Redis instance.
-url = {{ .Values.proxyd.redis.url | quote }}
+url = {{ .Values.proxyd.config.cache.redis.url | quote }}
+{{- end }}
 
 [metrics]
 # Whether or not to enable Prometheus metrics.

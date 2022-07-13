@@ -79,7 +79,6 @@ volumePermissions:
 ##
 # schedulerName:
 
-
 ## Pod Security Context
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 ##
@@ -420,10 +419,10 @@ networkPolicy:
   ## LabelSelector to select these namespaces, note that the networkPolicy's namespace should also be explicitly added.
   ##
   # explicitNamespacesSelector:
-    # matchLabels:
-      # role: frontend
-    # matchExpressions:
-      # - {key: role, operator: In, values: [frontend]}
+  # matchLabels:
+  # role: frontend
+  # matchExpressions:
+  # - {key: role, operator: In, values: [frontend]}
 
 ## Configure extra options for liveness and readiness probes
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes)
@@ -467,7 +466,8 @@ metrics:
     enabled: false
     additionalLabels: {}
     namespace: ""
-    rules: []
+    rules:
+      []
       ## These are just examples rules, please adapt them to your needs.
       ## Make sure to constraint the rules to the current postgresql service.
       # - alert: HugeReplicationLag

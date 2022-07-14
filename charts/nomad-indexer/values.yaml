@@ -80,14 +80,6 @@ prometheus-postgres-exporter:
     password: postgres
     database: nomad-indexer
 
-  # ref: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-postgres-exporter/values.yaml#L27
-  serviceMonitor:
-    namespace: TODO
-    interval: 30s
-    telemetryPath: TODO
-    labels: TODO
-    timeout: 10s
-
 podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/port: "9090"

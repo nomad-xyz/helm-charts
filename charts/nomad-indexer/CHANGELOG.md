@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Supported prometheus-postgres-exporter
+- Fixed postgres username / password / database dependency values to match what the subchart expects
+- Changed image sha to use main instead of outdated commit
+- Commented out resource limits for now (will re-add)
+
 ## 0.0.14
 
 - Support horizontally scaling the indexer api based on cpu utilization

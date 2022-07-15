@@ -12,7 +12,7 @@ indexer:
   image:
     repository: gcr.io/nomad-xyz/nomad-indexer
     pullPolicy: Always
-    tag: "sha-2354e1d8"
+    tag: "main"
   db:
     host: "{{ .Release.Name }}-postgresql"
     user: postgres
@@ -61,15 +61,27 @@ indexer:
 
 postgresql:
   # ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml#L437-L441
-  postgresql:
-    username: postgres
+  postgresqlUsername: postgres
+  postgresqlPassword: postgres
+  postgresqlDatabase: nomad-indexer
+  # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  # TODO: re-add resource requests
+  # primary:
+  #   resources:
+  #     requests:
+  #       cpu: 2000m
+
+prometheus-postgres-exporter:
+  # ref: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-postgres-exporter/values.yaml
+  # config ref: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-postgres-exporter/values.yaml#L101
+  config:
+    host: "{{ .Release.Name }}-postgresql"
+    user: postgres
     password: postgres
     database: nomad-indexer
-    # ref: https://kubernetes.io/docs/user-guide/compute-resources/
-    primary:
-      resources:
-        requests:
-          cpu: 2000m
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9187"
 
 podAnnotations:
   prometheus.io/scrape: "true"

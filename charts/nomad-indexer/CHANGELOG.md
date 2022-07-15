@@ -2,10 +2,11 @@
 
 ## Unreleased
 
+## 0.0.15
+
 - Supported prometheus-postgres-exporter
-- Fixed postgres username / password / database dependency values to match what the subchart expects
-- Changed image sha to use main instead of outdated commit
-- Commented out resource limits for now (will re-add)
+- upgraded postgres dependency from v8 -> v11
+- used remote bitnami chart instead of the committed local chart (with regenerated chart lock file)
 
 ## 0.0.14
 

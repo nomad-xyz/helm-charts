@@ -67,11 +67,11 @@ postgresql:
     postgresPassword: postgres
     database: nomad-indexer
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
-  # TODO: re-add resource requests
-  # primary:
-  #   resources:
-  #     requests:
-  #       cpu: 2000m
+  primary:
+    resources:
+      requests:
+        memory: 256Mi # default
+        cpu: 2000m
 
 prometheus-postgres-exporter:
   # ref: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-postgres-exporter/values.yaml

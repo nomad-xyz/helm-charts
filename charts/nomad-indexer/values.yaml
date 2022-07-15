@@ -60,10 +60,12 @@ indexer:
       targetCPUUtilizationPercentage: 80
 
 postgresql:
-  # ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml#L437-L441
-  postgresqlUsername: postgres
-  postgresqlPassword: postgres
-  postgresqlDatabase: nomad-indexer
+  # ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml
+  # auth ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml#L119
+  auth:
+    enablePostgresUser: true # default is true, but want to be explicit on how the `postgres` user is setup
+    postgresPassword: postgres
+    database: nomad-indexer
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   # TODO: re-add resource requests
   # primary:

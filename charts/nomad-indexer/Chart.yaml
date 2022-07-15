@@ -29,4 +29,4 @@ dependencies:
     repository: "file://charts/postgresql"
   - name: prometheus-postgres-exporter
     version: "3.0.3"
-    repository: "file://charts/prometheus-postgres-exporter"
+    repository: "https://prometheus-community.github.io/helm-charts"

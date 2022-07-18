@@ -23,10 +23,11 @@ jobs:
         uses: azure/setup-helm@v1
         with:
           version: v3.4.0
-      
+
       - name: Add Helm dependency repos
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
+          help repo add prometheus-postgres-exporter https://prometheus-community.github.io/helm-charts
           helm repo update
 
       - name: Run chart-releaser

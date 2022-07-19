@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.0.16
+
+- downgrade postgres version from v14 -> v11.6 to be compatible with current postgres version
+
 ## 0.0.15
 
 - Supported prometheus-postgres-exporter

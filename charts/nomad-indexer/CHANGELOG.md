@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.0.16
+
+- downgrade postgres version from v14 -> v11.7.0-debian-10-r26 to be compatible with staging/prod postgres version
+
 ## 0.0.15
 
 - Supported prometheus-postgres-exporter

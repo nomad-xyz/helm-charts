@@ -60,22 +60,16 @@ indexer:
       targetCPUUtilizationPercentage: 80
 
 postgresql:
-  # ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml
-  # auth ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml#L119
-  auth:
-    enablePostgresUser: true # default is true, but want to be explicit on how the `postgres` user is setup
-    postgresPassword: postgres
-    database: nomad-indexer
+  # ref: see charts/postgres/values.yaml file for the values
+  postgresqlUsername: postgres
+  postgresqlPassword: postgres
+  postgresqlDatabase: nomad-indexer
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   primary:
     resources:
       requests:
         memory: 256Mi # default
         cpu: 2000m
-  # ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml#L94
-  # ref: https://docs.bitnami.com/kubernetes/infrastructure/postgresql/configuration/change-image-version/
-  image:
-    tag: 11.7.0-debian-10-r26
 
 prometheus-postgres-exporter:
   # ref: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-postgres-exporter/values.yaml

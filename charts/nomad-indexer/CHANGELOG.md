@@ -6,6 +6,7 @@
 
 - downgrade postgres dependency from v11.6.16 -> v8.6.4
 - commit postgres chart dependency since it's not hosted on bitnami
+- disable pod security policy on prometheus-postgres-exporter
 
 ## 0.0.16
 

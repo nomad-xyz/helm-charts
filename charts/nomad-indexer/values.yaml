@@ -82,6 +82,8 @@ prometheus-postgres-exporter:
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "9187"
+  rbac:
+    pspEnabled: false
 
 podAnnotations:
   prometheus.io/scrape: "true"

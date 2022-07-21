@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 0.0.17
+
+- downgrade postgres dependency from v11.6.16 -> v8.6.4
+- commit postgres chart dependency since it's not hosted on bitnami
+- disable pod security policy on prometheus-postgres-exporter
+
 ## 0.0.16
 
 - downgrade postgres version from v14 -> v11.7.0-debian-10-r26 to be compatible with staging/prod postgres version

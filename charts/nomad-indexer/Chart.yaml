@@ -15,7 +15,7 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.0.16
+version: 0.0.17
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -25,8 +25,18 @@ appVersion: 0.0.1
 
 dependencies:
   - name: postgresql
-    version: "11.6.16"
-    repository: "https://charts.bitnami.com/bitnami"
+    version: "8.6.4"
+    # Note:
+    #
+    # We commit the postgres chart to git and reference it in this way
+    # because version 8.6.4 is not available on bitnami's hosted chart site.
+    # See ref and search for 8.6.4: https://charts.bitnami.com/bitnami
+    #
+    # We are not on the most up to date postgres chart version (v11.6.16 at the time of writing)
+    # since we'd need to do a data migration since that would upgrade the postgres db from v11 -> v14.
+    #
+    # We'll most likely move to cloudsql in the future anyways, so we are intentionally not upgrading the chart version.
+    repository: "file://charts/postgresql"
   - name: prometheus-postgres-exporter
     version: "3.0.3"
     repository: "https://prometheus-community.github.io/helm-charts"

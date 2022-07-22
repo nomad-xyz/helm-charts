@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.0.18
+
+- enable pg_stat_statements as part of indexer postgres shared preload libraries
+- create extension if it doesn't already exist as part of indexer postgres setup
+- override indexer psql exporter queries to support our version of postgres (total_time was split into total_exec_time + total_plan_time in postgres v13+)
+- fix shape of indexer psql exporter values
+
 ## 0.0.17
 
 - downgrade postgres dependency from v11.6.16 -> v8.6.4

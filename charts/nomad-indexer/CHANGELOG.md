@@ -4,7 +4,7 @@
 
 ## 0.0.19
 
-- add note about overriding psql exporter host value in terraform
+- add note about overriding psql exporter host value
 
 ## 0.0.18
 

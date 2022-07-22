@@ -275,3 +275,42 @@ watcher:
 
   # watcher.podAnnotations -- Add extra annotations to the pod
   podAnnotations: {}
+
+# Monitoring Agent configuration
+#
+monitor:
+
+  # monitor.enabled -- Enable Nomad agent monitor
+  enabled: false
+
+  # monitor.replicas -- Number of instances of monitor
+  replicas: 1
+
+  # monitor.image -- Nomad agent monitor docker image configuration (immutable image tags are recommended)
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/nomad-agent
+    # tag: latest
+    pullPolicy: Always
+
+  # monitor.envFrom -- Environment variables from a config/secret file
+  envFrom: []
+
+  # monitor.envVars -- Environment variables to add Nomad agent monitor pod
+  envVars: []
+
+  # monitor.resources -- monitor container's resource requests and limits
+  # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  resources:
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+
+  # monitor.podLabels -- Add extra labels to the pods
+  podLabels: {}
+
+  # monitor.podAnnotations -- Add extra annotations to the pod
+  podAnnotations: {}

@@ -1,0 +1,93 @@
+{{- if .Values.monitor.enabled }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "agent.fullname" . }}-monitor
+  labels: {{- include "agent.labels" . | nindent 4 }}
+    app.kubernetes.io/component: monitor
+spec:
+  selector:
+    matchLabels: {{- include "agent.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: monitor
+  replicas: {{ .Values.monitor.replicas }}
+  serviceName: {{ include "agent.fullname" . }}-monitor-svc
+  template:
+    metadata:
+      annotations:
+        {{- with .Values.commonAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.monitor.podAnnotations }}
+        {{- toYaml . | monitor 8 }}
+        {{- end }}
+      labels: {{- include "agent.labels" . | nindent 8 }}
+        app.kubernetes.io/component: monitor
+        {{- with .Values.commonLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.monitor.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      {{- if .Values.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.monitor.image.registry }}/{{ .Values.monitor.image.repository }}:{{ .Values.monitor.image.tag | default .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.monitor.image.pullPolicy }}
+          {{- if .Values.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
+          command: ["./monitor"]
+          envFrom:
+            - secretRef:
+                name: {{ include "agent.fullname" . }}-awscreds
+          {{- with .Values.commonEnvFrom }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.monitor.envFrom }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          env: 
+          {{- with .Values.commonEnvVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.monitor.envVars }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.monitor.resources }}
+          resources: {{- toYaml .Values.monitor.resources | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: state
+              mountPath: {{ .Values.storage.mountPath }}
+          ports: 
+            - name: metrics
+              containerPort: {{ .Values.metrics.port }}
+      {{- if .Values.serviceAccount.create }}
+      serviceAccountName: {{ include "agent.serviceAccountName" . }}
+      {{- end }}
+      {{- with .Values.monitor.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.monitor.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.monitor.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  volumeClaimTemplates:
+  - metadata:
+      name: state
+    spec:
+      storageClassName: {{ .Values.storage.storageClass }}
+      accessModes: [ {{ .Values.storage.accessModes }} ]
+      resources:
+        requests:
+          storage: {{ .Values.storage.capacity }}
+{{- end }}

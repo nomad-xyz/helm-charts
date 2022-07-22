@@ -103,12 +103,12 @@ processor:
   # processor.resources -- Processor container's resource requests and limits
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
-    limits:
-      cpu: 50m
-      memory: 50Mi
-    requests:
-      cpu: 10m
-      memory: 20Mi
+    # limits:
+    #   cpu: 1.5m
+    #   memory: 1Gi
+    # requests:
+    #   cpu: .5m
+    #   memory: 500Mi
 
   # processor.podLabels -- Add extra labels to the pods
   podLabels: {}
@@ -143,12 +143,12 @@ relayer:
   # relayer.resources -- Relayer container's resource requests and limits
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
-    limits:
-      cpu: 50m
-      memory: 50Mi
-    requests:
-      cpu: 10m
-      memory: 20Mi
+    # limits:
+    #   cpu: 1.5m
+    #   memory: 1Gi
+    # requests:
+    #   cpu: .5m
+    #   memory: 500Mi
 
   # relayer.podLabels -- Add extra labels to the pods
   podLabels: {}
@@ -183,12 +183,12 @@ updater:
    # updater.resources -- Updater container's resource requests and limits
    # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
-    limits:
-      cpu: 50m
-      memory: 50Mi
-    requests:
-      cpu: 10m
-      memory: 20Mi
+    # limits:
+    #   cpu: 1.5m
+    #   memory: 1Gi
+    # requests:
+    #   cpu: .5m
+    #   memory: 500Mi
 
   # updater.podLabels -- Add extra labels to the pods
   podLabels: {}
@@ -223,12 +223,12 @@ kathy:
   # kathy.resources -- Kathy container's resource requests and limits
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
-    limits:
-      cpu: 50m
-      memory: 50Mi
-    requests:
-      cpu: 10m
-      memory: 20Mi
+    # limits:
+    #   cpu: 1.5m
+    #   memory: 1Gi
+    # requests:
+    #   cpu: .5m
+    #   memory: 500Mi
 
   # kathy.podLabels -- Add extra labels to the pods
   podLabels: {}
@@ -263,12 +263,12 @@ watcher:
   # watcher.resources -- Watcher container's resource requests and limits
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
-    limits:
-      cpu: 50m
-      memory: 50Mi
-    requests:
-      cpu: 10m
-      memory: 20Mi
+    # limits:
+    #   cpu: 1.5m
+    #   memory: 1Gi
+    # requests:
+    #   cpu: .5m
+    #   memory: 500Mi
 
   # watcher.podLabels -- Add extra labels to the pods
   podLabels: {}
@@ -302,12 +302,12 @@ monitor:
   # monitor.resources -- monitor container's resource requests and limits
   # ref: https://kubernetes.io/docs/user-guide/compute-resources/
   resources:
-    limits:
-      cpu: 50m
-      memory: 50Mi
-    requests:
-      cpu: 10m
-      memory: 20Mi
+    # limits:
+    #   cpu: 1.5m
+    #   memory: 1Gi
+    # requests:
+    #   cpu: .5m
+    #   memory: 500Mi
 
   # monitor.podLabels -- Add extra labels to the pods
   podLabels: {}

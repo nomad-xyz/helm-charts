@@ -75,10 +75,11 @@ prometheus-postgres-exporter:
   # ref: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-postgres-exporter/values.yaml
   # config ref: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-postgres-exporter/values.yaml#L101
   config:
-    host: "{{ .Release.Name }}-postgresql"
-    user: postgres
-    password: postgres
-    database: nomad-indexer
+    datasource:
+      host: "{{ .Release.Name }}-postgresql"
+      user: postgres
+      password: postgres
+      database: nomad-indexer
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "9187"

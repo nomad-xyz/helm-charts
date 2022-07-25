@@ -1,32 +1,95 @@
-replicaCount: 1
 
-image:
-  repository: gcr.io/nomad-xyz/nomad-monitor
-  pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: 'latest'
+# nameOverride -- String to partially override monitor.fullname template with a string (will prepend the release name)
+#
+nameOverride: ""
 
-monitor:
-  networks: ["kovan", "moonbasealpha"]
-  config: # Contents of .env file
+# fullnameOverride -- String to fully override monitor.fullname template with a string
+#
+fullnameOverride: ""
 
-imagePullSecrets: []
-nameOverride: ''
-fullnameOverride: ''
+# serviceAccount -- ServiceAccount configuration
+#
+serviceAccount:
+  # serviceAccount.create -- Create service account
+  create: true
+  # serviceAccount.name -- Name of service account to use if create is true
+  name: ""
 
-podAnnotations:
+# -- Configure Pods Security Context
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+#
+podSecurityContext:
+  # podSecurityContext.enabled -- Enable pod security context
+  enabled: true
+  # podSecurityContext.fsGroup -- fsGroup ID for the pod
+  fsGroup: 1001
+
+# -- Configure Container Security Context (only main container)
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
+#
+containerSecurityContext:
+  # containerSecurityContext.enabled -- Enable container security context
+  enabled: true
+  # containerSecurityContext.runAsUser -- User ID for the container  
+  runAsUser: 1001
+
+# commonLabels -- Add extra labels to all pods
+#
+commonLabels: {}
+
+# commonAnnotations -- Add extra annotations to all pods
+#
+commonAnnotations:
   prometheus.io/scrape: 'true'
   prometheus.io/port: '9090'
 
-resources:
-  {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+# commonEnvFrom -- Common environment variables from a config/secret file
+commonEnvFrom: []
+
+# commonEnvVars -- Common environment variables to add all pods
+#
+commonEnvVars: []
+
+# metrics -- Container port exposing Nomad Monitor metrics
+#
+metrics:
+  port: '9090'
+
+# Monitoring Agent configuration
+#
+monitor:
+
+  # monitor.enabled -- Enable Nomad agent monitor
+  enabled: true
+
+  # monitor.replicas -- Number of instances of monitor
+  replicas: 1
+
+  # monitor.image -- Nomad agent monitor docker image configuration (immutable image tags are recommended)
+  image:
+    registry: gcr.io
+    repository: nomad-xyz/nomad-agent
+    # tag: latest
+    pullPolicy: Always
+
+  # monitor.envFrom -- Environment variables from a config/secret file
+  envFrom: []
+
+  # monitor.envVars -- Environment variables to add Nomad agent monitor pod
+  envVars: []
+
+  # monitor.resources -- monitor container's resource requests and limits
+  # ref: https://kubernetes.io/docs/user-guide/compute-resources/
+  resources:
+    # limits:
+    #   cpu: 100m
+    #   memory: 100Mb
+    # requests:
+    #   cpu: 50m
+    #   memory: 50Mb
+
+  # monitor.podLabels -- Add extra labels to the pods
+  podLabels: {}
+
+  # monitor.podAnnotations -- Add extra annotations to the pod
+  podAnnotations: {}

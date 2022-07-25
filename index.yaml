@@ -530,6 +530,16 @@ entries:
     version: 0.0.1-rc1
   nomad-monitor:
   - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2022-07-25T21:22:30.716091602Z"
+    description: A tool that pull metrics for bridges
+    digest: f0bff7c6f1398bff23444d74cb31776234d6c349a9bf515d69f60ea08702f764
+    name: nomad-monitor
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-monitor-0.2.0/nomad-monitor-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-03-04T23:28:09.507466706Z"
     description: A tool that queries metrics about Ethereum accounts
@@ -612,4 +622,4 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/tailscale-subnet-router-0.1.0/tailscale-subnet-router-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-22T19:06:37.653450309Z"
+generated: "2022-07-25T21:22:30.716275108Z"

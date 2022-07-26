@@ -140,6 +140,23 @@ entries:
   nomad-indexer:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2022-07-26T17:02:06.348411803Z"
+    dependencies:
+    - name: postgresql
+      repository: file://charts/postgresql
+      version: 8.6.4
+    - name: prometheus-postgres-exporter
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 3.0.3
+    description: A tool that indexes Nomad Events from one or more blockchains
+    digest: 8b65f73bae21195620e585c54d7c17be31cf996f2f1e706c7e00ba9369861b09
+    name: nomad-indexer
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-indexer-0.0.20/nomad-indexer-0.0.20.tgz
+    version: 0.0.20
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2022-07-26T16:34:59.416684086Z"
     dependencies:
     - name: postgresql
@@ -639,4 +656,4 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/tailscale-subnet-router-0.1.0/tailscale-subnet-router-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-26T16:34:59.416976202Z"
+generated: "2022-07-26T17:02:06.348919803Z"

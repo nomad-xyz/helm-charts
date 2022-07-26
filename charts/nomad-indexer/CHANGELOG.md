@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.0.20
+
+- update prometheus port to match the metrics port
+
 ## 0.0.19
 
 - add note about overriding psql exporter host value

@@ -80,7 +80,9 @@ prometheus-postgres-exporter:
   # config ref: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-postgres-exporter/values.yaml#L101
   config:
     datasource:
-      host: "{{ .Release.Name }}-postgresql"
+      # Note: We need to override this value since templating is not supported in the values.yaml
+      # read this issue for more details: https://github.com/helm/helm/issues/2492
+      host: "override this"
       user: postgres
       password: postgres
       database: nomad-indexer

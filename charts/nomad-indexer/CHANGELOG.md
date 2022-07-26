@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.0.19
+
+- add note about overriding psql exporter host value
+
 ## 0.0.18
 
 - enable pg_stat_statements as part of indexer postgres shared preload libraries

@@ -616,6 +616,16 @@ entries:
   nomad-monitor-typescript:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2022-12-15T19:02:08.248514418Z"
+    description: The new monitoring solution
+    digest: 5f3a8bd48a43df30f34c3cc2403056c2ff082390f7995b7087f2f57897257d8b
+    name: nomad-monitor-typescript
+    type: application
+    urls:
+    - https://github.com/nomad-xyz/helm-charts/releases/download/nomad-monitor-typescript-0.2.0/nomad-monitor-typescript-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2022-12-15T17:57:49.069139391Z"
     description: The new monitoring solution
     digest: f0461fa977d4bbb43527191274cb1363274ac2516d86baed45bc05c1e78b7ebe
@@ -667,4 +677,4 @@ entries:
     urls:
     - https://github.com/nomad-xyz/helm-charts/releases/download/tailscale-subnet-router-0.1.0/tailscale-subnet-router-0.1.0.tgz
     version: 0.1.0
-generated: "2022-12-15T17:57:49.069522793Z"
+generated: "2022-12-15T19:02:08.248946424Z"

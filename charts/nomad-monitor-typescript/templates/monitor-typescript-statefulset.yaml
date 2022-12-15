@@ -40,7 +40,7 @@ spec:
           {{- if .Values.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
-          command: ["./monitor"]
+          command: ["yarn", "run", "start"]
           envFrom:
           {{- with .Values.commonEnvFrom }}
           {{- toYaml . | nindent 12 }}
